@@ -34,5 +34,30 @@ vagrant up
 vagrant ssh 
 ```
 
+```
+uname -r
+```
+
+![image](https://user-images.githubusercontent.com/84719218/235879544-1b3ad04f-01c0-47fe-96c6-a90ba0e694e3.png)
+
+```
+sudo apt-get install build-essential kernel-package libncurses-dev
+```
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
