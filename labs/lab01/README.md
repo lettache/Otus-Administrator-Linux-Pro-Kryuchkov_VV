@@ -41,11 +41,29 @@ uname -r
 ![image](https://user-images.githubusercontent.com/84719218/235879544-1b3ad04f-01c0-47fe-96c6-a90ba0e694e3.png)
 
 ```
-sudo apt-get install build-essential kernel-package libncurses-dev
+sudo apt-get install build-essential kernel-package libncurses-dev flex bison libssl-dev
 ```
 
 ```
+sudo apt-get install linux-source
+```
 
+```
+cd /usr/src
+sudo tar xjf linux-source-5.4.0.tar.bz2
+sudo ln -s linux-source-5.4.0 linux
+```
+
+```
+cd /usr/src/linux
+sudo make oldconfig
+sudo make menuconfig
+```
+
+```
+sudo make-kpkg clean
+sudo make-kpkg --initrd --append-to-version=-mykernel kernel_image kernel_headers
+```
 
 
 
