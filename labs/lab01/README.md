@@ -25,6 +25,7 @@ vagrant init centos/stream8
 ```
 mcedit Vagrantfile
 ```
+
 ```
 vagrant up
 ```
