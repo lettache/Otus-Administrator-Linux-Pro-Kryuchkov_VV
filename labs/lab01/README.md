@@ -17,8 +17,16 @@
 **1. Обновить ядро ОС из репозитория ELRepo**
 
 ```
-vagrant init generic/centos8s
+vagrant init centos/stream8
 ```
 
-![image](https://user-images.githubusercontent.com/84719218/235869904-7950010d-f5da-4464-80fd-0117909eb496.png)
+![image](https://user-images.githubusercontent.com/84719218/235871994-75c6f7a5-8f4e-45a7-8ae6-27f6bc33fafb.png)
+
+```
+mcedit Vagrantfile
+```
+```
+vagrant up
+```
+
 
