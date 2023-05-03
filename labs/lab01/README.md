@@ -17,10 +17,10 @@
 **1. Обновить ядро ОС из репозитория ELRepo**
 
 ```
-vagrant init centos/stream8
+vagrant init ubuntu/focal64
 ```
 
-![image](https://user-images.githubusercontent.com/84719218/235871994-75c6f7a5-8f4e-45a7-8ae6-27f6bc33fafb.png)
+![image](https://user-images.githubusercontent.com/84719218/235877918-dbbdbea1-e3d1-4d2f-a8eb-05b874db503c.png)
 
 ```
 mcedit Vagrantfile
@@ -29,5 +29,10 @@ mcedit Vagrantfile
 ```
 vagrant up
 ```
+
+```
+vagrant ssh 
+```
+
 
 
