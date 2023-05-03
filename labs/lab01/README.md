@@ -9,5 +9,5 @@
   *3. Загрузить Vagrant box в Vagrant Cloud*
   
    *Дополнительные задания:*
-        - Ядро собрано из исходников
-        - В образе нормально работают VirtualBox Shared Folders
+   - Ядро собрано из исходников
+   - В образе нормально работают VirtualBox Shared Folders
