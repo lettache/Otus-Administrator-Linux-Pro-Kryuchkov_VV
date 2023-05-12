@@ -41,19 +41,19 @@ uname -r
 ![image](https://user-images.githubusercontent.com/84719218/235879544-1b3ad04f-01c0-47fe-96c6-a90ba0e694e3.png)
 
 ```
-sudo apt-get install build-essential kernel-package libncurses-dev flex bison libssl-dev libelf-dev
+sudo apt-get install build-essential kernel-package libncurses-dev flex bison libssl-dev libelf-dev dwarves
 ```
 
 ```
-sudo wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.3.1.tar.gz
+sudo wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.9.tar.gz
 ```
 
 ```
-sudo tar xf linux-6.3.1.tar.gz 
+sudo tar xf linux-5.9.tar.gz 
 ```
 
 ```
-cd linux-6.3.1/
+cd linux-5.9/
 sudo make oldconfig
 ```
 
@@ -61,7 +61,7 @@ sudo make oldconfig
 sudo make-kpkg clean
 sudo scripts/config --disable SYSTEM_TRUSTED_KEYS
 sudo scripts/config --disable SYSTEM_REVOCATION_KEYS
-sudo make-kpkg --initrd kernel_image kernel_headers
+sudo make
 ```
 
 
