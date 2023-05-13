@@ -20,6 +20,9 @@
 vagrant init ubuntu/focal64
 ```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/ed9430dd-59f2-4b83-92d1-f54630b05e8e)
+
+
 ![image](https://user-images.githubusercontent.com/84719218/235877918-dbbdbea1-e3d1-4d2f-a8eb-05b874db503c.png)
 
 ```
