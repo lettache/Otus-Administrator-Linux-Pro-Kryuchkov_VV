@@ -17,13 +17,10 @@
 **1. Обновить ядро ОС**
 
 ```
-vagrant init ubuntu/focal64
+vagrant init centos/7
 ```
 
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/ed9430dd-59f2-4b83-92d1-f54630b05e8e)
-
-
-![image](https://user-images.githubusercontent.com/84719218/235877918-dbbdbea1-e3d1-4d2f-a8eb-05b874db503c.png)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/79866c1a-c124-49d6-a217-191141c68d83)
 
 ```
 mcedit Vagrantfile
@@ -41,7 +38,7 @@ vagrant ssh
 uname -r
 ```
 
-![image](https://user-images.githubusercontent.com/84719218/235879544-1b3ad04f-01c0-47fe-96c6-a90ba0e694e3.png)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/ed9430dd-59f2-4b83-92d1-f54630b05e8e)
 
 ```
 sudo apt-get install build-essential kernel-package libncurses-dev flex bison libssl-dev libelf-dev dwarves
