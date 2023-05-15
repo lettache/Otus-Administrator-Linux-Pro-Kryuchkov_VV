@@ -37,35 +37,26 @@ vagrant ssh
 ```
 uname -r
 ```
-
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/ed9430dd-59f2-4b83-92d1-f54630b05e8e)
-
-
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/4c047a55-3fca-4f85-b7da-785d9c82523e)
 
 ```
-sudo apt-get install build-essential kernel-package libncurses-dev flex bison libssl-dev libelf-dev dwarves
+sudo yum install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
 ```
 
 ```
-sudo wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.9.tar.gz
+sudo yum --enablerepo elrepo-kernel install kernel-ml -y
 ```
 
 ```
-sudo tar xf linux-5.9.tar.gz 
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo grub2-set-default 0
 ```
 
 ```
-cd linux-5.9/
-sudo make oldconfig
+uname -r
 ```
 
-```
-sudo make-kpkg clean
-sudo scripts/config --disable SYSTEM_TRUSTED_KEYS
-sudo scripts/config --disable SYSTEM_REVOCATION_KEYS
-sudo make
-```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/422200f4-23c2-4494-875b-1930381c7dc1)
 
 
 
