@@ -40,6 +40,9 @@ uname -r
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/ed9430dd-59f2-4b83-92d1-f54630b05e8e)
 
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/4c047a55-3fca-4f85-b7da-785d9c82523e)
+
 ```
 sudo apt-get install build-essential kernel-package libncurses-dev flex bison libssl-dev libelf-dev dwarves
 ```
