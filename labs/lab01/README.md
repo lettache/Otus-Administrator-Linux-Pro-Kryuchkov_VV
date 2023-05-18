@@ -87,7 +87,6 @@ cd ..
 packer build centos.json
 ```
 
-1
 
 
 
