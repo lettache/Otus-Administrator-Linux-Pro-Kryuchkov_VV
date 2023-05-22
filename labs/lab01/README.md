@@ -113,7 +113,15 @@ vagrant ssh
 uname -r
 ```
 
+```
+vagrant cloud auth login
+```
 
+```
+vagrant cloud publish --release VladimirKru/centos-7-kernel5 1.0 virtualbox centos-7-kernel-5-x86_64-Minimal.box
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/07b64c46-8b20-4e6f-b849-5a308334be83)
 
 
 
