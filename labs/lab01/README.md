@@ -96,16 +96,16 @@ vagrant box add centos-7-kernel15 centos-7-kernel-5-x86_64-Minimal.box
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/fb17d505-8ce2-436d-b5b0-20b0a8831cef)
 
 ```
-vagrant init centos8-kernel5
-```
-
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/4827a515-f529-4739-ba79-7551eb178308)
-
-```
 vagrant box list
 ```
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/3b4df201-6d51-46ac-bea7-0c72140a30d9)
+
+```
+vagrant init centos-7-kernel15
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/134d27ea-f383-46d0-8053-f960e1396bf2)
 
 ```
 vagrant up
