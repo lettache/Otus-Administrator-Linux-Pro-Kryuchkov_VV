@@ -17,3 +17,41 @@
 
 **Решение:**
 
+```
+sudo lshw -short | grep disk
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/7a6c9030-5590-4afc-82e7-1306ea81f73c)
+
+```
+sudo fdisk -l
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/4bba2be1-79ce-4d62-b89f-0a4e8b5b4bd2)
+
+```
+sudo mdadm --zero-superblock --force /dev/sd{a,b,c,d,e,}
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/6cd25b12-ea8f-4e31-85e2-c6b3cd012039)
+
+```
+mdadm --create --verbose /dev/md0 -l 6 -n 5 /dev/sd{b,c,d,e,f}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
