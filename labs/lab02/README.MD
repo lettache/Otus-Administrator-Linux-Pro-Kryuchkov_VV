@@ -53,7 +53,7 @@ sudo mdadm -D /dev/md0
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/dd478ef5-b72d-46fa-9276-b34823dc66a7)
 
-**Создание конфигурационного файла mdadm.conf
+**Создание конфигурационного файла mdadm.conf**
 
 ```
 sudo mdadm --detail --scan --verbose
@@ -62,7 +62,12 @@ sudo mdadm --detail --scan --verbose
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/a76c0ff9-23b3-4082-9199-d1ba37f8e2bb)
 
 
+```
+echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
+sudo mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+```
 
+**Сломать/починить RAID**
 
 
 
