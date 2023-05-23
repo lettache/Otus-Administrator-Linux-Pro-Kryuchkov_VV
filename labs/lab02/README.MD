@@ -48,12 +48,18 @@ cat /proc/mdstat
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/2919094c-88a8-45ff-8ef8-23d83b52ac9a)
 
 ```
-mdadm -D /dev/md0
+sudo mdadm -D /dev/md0
 ```
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/dd478ef5-b72d-46fa-9276-b34823dc66a7)
 
+**Создание конфигурационного файла mdadm.conf
 
+```
+sudo mdadm --detail --scan --verbose
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/a76c0ff9-23b3-4082-9199-d1ba37f8e2bb)
 
 
 
