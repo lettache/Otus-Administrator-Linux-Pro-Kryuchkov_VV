@@ -24,6 +24,7 @@
                         :dfile => './sata5.vdi',
                         :size => 250,
                         :port => 5
+                        }
 ```
 
 ```
