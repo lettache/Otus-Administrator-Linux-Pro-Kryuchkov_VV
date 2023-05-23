@@ -33,7 +33,7 @@ sudo fdisk -l
 sudo mdadm --zero-superblock --force /dev/sd{a,b,c,d,e,}
 ```
 
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/6cd25b12-ea8f-4e31-85e2-c6b3cd012039)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/3455a6ac-2bf7-40cd-b7b6-fdf5efd23100)
 
 ```
 mdadm --create --verbose /dev/md0 -l 6 -n 5 /dev/sd{b,c,d,e,f}
