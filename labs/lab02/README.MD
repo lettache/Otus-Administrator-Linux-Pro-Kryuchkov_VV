@@ -17,6 +17,15 @@
 
 **Решение:**
 
+**Добавить в Vagrantfile еще дисков**
+
+```
+:sata5 => {
+                        :dfile => './sata5.vdi',
+                        :size => 250,
+                        :port => 5
+```
+
 ```
 sudo lshw -short | grep disk
 ```
@@ -63,8 +72,11 @@ sudo mdadm --detail --scan --verbose
 
 
 ```
+su
+cd /etc/
+mkdir mdadm
 echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
-sudo mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
 ```
 
 **Сломать/починить RAID**
@@ -123,6 +135,7 @@ parted /dev/md0 mkpart primary ext4 80% 100%
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/b7d5866b-2d8c-4960-ae63-234eed5fabbb)
 
 ```
+for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done
 mkdir -p /raid/part{1,2,3,4,5}
 for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done
 ```
