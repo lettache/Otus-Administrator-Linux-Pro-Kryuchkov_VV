@@ -172,13 +172,41 @@ df -Th /data
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/de280433-3cbc-4449-b11f-c22ec9bcf3f9)
 
+**Уменьшение LV**
 
+```
+umount /data/ 
+e2fsck -fy /dev/otus/test 
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/b6f85cf3-d14e-49dd-a806-a18a91e8c498)
 
+```
+resize2fs /dev/otus/test 10G
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/2bfad293-3633-4d59-80da-d8b53fd485ec)
 
+```
+lvreduce /dev/otus/test -L 10G
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8c995284-52f2-4eae-8b8d-3a99f820d5f2)
 
+```
+mount /dev/otus/test /data/
+df -Th /data/ 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/bfed6e5f-c193-49a3-abfc-6caa86085c90)
+
+```
+lvs /dev/otus/test
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/9a934b7a-2d52-4db0-bc8d-f522d314793a)
+
+**LVM Snapshot**
 
 
 
