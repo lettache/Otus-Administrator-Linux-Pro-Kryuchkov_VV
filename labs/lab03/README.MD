@@ -331,6 +331,171 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/769b4acf-03ad-42f8-917d-7656601fdf40)
 
+```
+cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g;  s/.img//g"` --force; done
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/e6e840f9-b60d-491f-b355-0b5c087993bc)
+
+```
+vi /boot/grub2/grub.cfg
+exit
+reboot
+```
+
+```
+lsblk
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8ad31261-4222-42b7-96ab-d12675e851f9)
+
+```
+lvremove /dev/VolGroup00/LogVol00
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/4aa15aeb-7d45-4198-8b63-d0b0d459baee)
+
+```
+lvcreate -n VolGroup00/LogVol00 -L 8G /dev/VolGroup00
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/75738ba7-bc23-4f7d-98b9-c1eb06446fb2)
+
+```
+mkfs.xfs /dev/VolGroup00/LogVol00 
+mount /dev/VolGroup00/LogVol00 /mnt 
+xfsdump -J - /dev/vg_root/lv_root | xfsrestore -J - /mnt 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/6b4f6284-5855-4229-a6bb-298b3f746458)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/190e1732-1611-4eff-b887-e4535cf3f261)
+
+```
+for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done
+chroot /mnt/ 
+grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/5c1e4dbc-1eb2-4552-9496-0945a6d86bb9)
+
+```
+cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g;  s/.img//g"` --force; done
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1b0db0fc-83ec-4d30-903c-fc7fcaed74d5)
+
+```
+pvcreate /dev/sdc /dev/sdd
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/5695a968-597f-450c-80bf-f80972ac3ae8)
+
+```
+vgcreate vg_var /dev/sdc /dev/sdd
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/455f4011-270d-47ef-95cc-8d7246c538aa)
+
+```
+lvcreate -L 950M -m1 -n lv_var vg_var 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/b1ab253a-5663-4880-82a6-3dc49d7e64e4)
+
+```
+mkfs.ext4 /dev/vg_var/lv_var
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/44f73084-b410-4c9c-b1c0-e4064cd1ca02)
+
+```
+mount /dev/vg_var/lv_var /mnt 
+cp -aR /var/* /mnt/ # rsync -avHPSAX /var/ /mnt/
+```
+
+```
+mkdir /tmp/oldvar && mv /var/* /tmp/oldvar 
+umount /mnt 
+mount /dev/vg_var/lv_var /var
+```
+
+```
+echo "`blkid | grep var: | awk '{print $2}'` /var ext4 defaults 0 0" >> /etc/fstab
+```
+
+```
+exit
+reboot
+```
+
+```
+lvremove /dev/vg_root/lv_root 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/cad5fa07-05ee-4e79-abc7-7b8f03fb7eb7)
+
+```
+vgremove /dev/vg_root
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/79478e89-45b4-4b09-8663-d8e6b62ff055)
+
+```
+pvremove /dev/sdb
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/0e80e650-afae-4100-8502-15e62ef9f2e1)
+
+```
+lvcreate -n LogVol_Home -L 2G /dev/VolGroup00
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/95b21f4d-c2d4-48be-b938-13d2ec6279f3)
+
+```
+mkfs.xfs /dev/VolGroup00/LogVol_Home 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1c2d119f-4f3b-448f-95a6-82632e77e3a3)
+
+```
+mount /dev/VolGroup00/LogVol_Home /mnt/ 
+cp -aR /home/* /mnt/  
+rm -rf /home/* 
+umount /mnt 
+mount /dev/VolGroup00/LogVol_Home /home/ 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d79dd806-d286-4bb8-a6e1-106a549614e1)
+
+```
+echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
+```
+
+```
+touch /home/file{1..20}
+```
+
+```
+lvcreate -L 100MB -s -n home_snap /dev/VolGroup00/LogVol_Home
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/b54a233f-64f1-4b71-8e07-8a8166cd15fc)
+
+```
+rm -f /home/file{11..20}
+```
+
+```
+umount /home 
+lvconvert --merge /dev/VolGroup00/home_snap
+mount /home
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/34b4efe2-e611-4e88-b80c-fb4347633984)
+
+
+
 
 
 
