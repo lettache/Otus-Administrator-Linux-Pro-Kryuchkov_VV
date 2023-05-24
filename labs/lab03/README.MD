@@ -136,6 +136,60 @@ dd if=/dev/zero of=/data/test.log bs=1M count=8000 status=progress
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f9eb8c93-7069-42d3-aef3-56c773c0fd3f)
 
+```
+df -Th /data/ 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/2cdd7486-ed8b-488c-87da-362f91953023)
+
+```
+lvextend -l+80%FREE /dev/otus/test 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/cb97a197-9f5a-4630-8b50-a2567c8379f9)
+
+```
+lvs /dev/otus/test
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/9f60b780-6259-4178-bcbd-720c99e2c6f0)
+
+```
+df -Th /data
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/65b5441a-adeb-4c12-bf5d-26e49f5f5617)
+
+```
+resize2fs /dev/otus/test
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f12fa45b-16b5-4c90-923d-c1954827317d)
+
+```
+df -Th /data
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/de280433-3cbc-4449-b11f-c22ec9bcf3f9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
