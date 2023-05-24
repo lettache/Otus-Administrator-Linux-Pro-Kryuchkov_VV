@@ -265,6 +265,62 @@ ll /data
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/5208f369-36ea-42d4-8ef2-b5103943b565)
 
+```
+pvcreate /dev/sd{d,e}
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/0c607749-f51e-43d6-abf5-2bf1b4c95c07)
+
+```
+vgcreate vg0 /dev/sd{d,e}
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d01f62d3-de82-4f26-b0f5-3973f3c1b866)
+
+```
+lvcreate -l+80%FREE -m1 -n mirror vg0
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/468b020b-7285-4921-a0c0-e1ce67905870)
+
+```
+lvs
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/61136a50-ec02-4505-a5a3-5aeb86e6e28f)
+
+**Домашнее задание**
+
+```
+pvcreate /dev/sdb
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/5262abb7-5d4b-484b-b8a0-e3c83cd69466)
+
+```
+vgcreate vg_root /dev/sdb
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/aa99e8e8-e0ca-4e97-8244-240858b54c7b)
+
+```
+lvcreate -n lv_root -l +100%FREE /dev/vg_root
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/07b1ef3c-ed5e-43f4-9fbc-4f218ecf9127)
+
+```
+mkfs.xfs /dev/vg_root/lv_root 
+mount /dev/vg_root/lv_root /mnt
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/564dc034-d49e-49c4-8522-4866d5babca9)
+
+```
+xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt
+```
+
+
 
 
 
