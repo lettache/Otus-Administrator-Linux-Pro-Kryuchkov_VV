@@ -209,22 +209,61 @@ lvs /dev/otus/test
 **LVM Snapshot**
 
 ```
+lvcreate -L 500M -s -n test-snap /dev/otus/test 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d324d021-bb5a-4ada-9704-b0a08523c4e5)
+
+```
+vgs -o +lv_size,lv_name | grep test 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8365c609-c936-4a7c-8676-e694c07e024e)
+
+```
 lsblk
 ```
 
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/aea749c7-6ba9-4612-8f33-a535e9f81735)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1b065fb2-1017-4a2b-816e-1665aa7b1814)
 
+```
+mkdir /data-snap 
+mount /dev/otus/test-snap /data-snap/ 
+ll /data-snap/ 
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d207270c-4976-447b-9af8-7cebdd1e5637)
 
+```
+umount /data-snap 
+```
 
+```
+cd ~
+rm test.log
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/9a95a253-afb2-4270-88a5-2d1f5a79ecce)
 
+```
+ll
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/3bb1bef9-2f98-4aa3-b0b6-e3c4fa21ce42)
 
+```
+umount /data 
+lvconvert --merge /dev/otus/test-snap 
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/59a83d5d-f0a3-4d44-a3d1-b2f379077dc3)
 
+```
+mount /dev/otus/test /data
+ll /data
+```
 
-
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/5208f369-36ea-42d4-8ef2-b5103943b565)
 
 
 
