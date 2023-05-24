@@ -317,10 +317,19 @@ mount /dev/vg_root/lv_root /mnt
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/564dc034-d49e-49c4-8522-4866d5babca9)
 
 ```
+yum install xfsdump
 xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt
 ```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/87fc158c-1665-407b-9501-e6ef930114f2)
 
+```
+for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done
+chroot /mnt/ 
+grub2-mkconfig -o /boot/grub2/grub.cfg 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/769b4acf-03ad-42f8-917d-7656601fdf40)
 
 
 
