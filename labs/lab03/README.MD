@@ -106,16 +106,35 @@ mount | grep /data
 
 **Расширение LVM**
 
+```
+pvcreate /dev/sdc
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/6e1c98d4-84c2-4394-89fa-b36f752ffb64)
 
+```
+vgextend otus /dev/sdc
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/77324ac7-361a-4feb-aea5-5337f95a3b85)
 
+```
+vgdisplay -v otus | grep 'PV Name'
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8d856bd1-1507-4e8c-b8d5-2efdd61acc7b)
 
+```
+vgs
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/16a5df65-e810-4ecb-97b0-e42bd437fda2)
 
+```
+dd if=/dev/zero of=/data/test.log bs=1M count=8000 status=progress 
+```
 
-
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f9eb8c93-7069-42d3-aef3-56c773c0fd3f)
 
 
 
