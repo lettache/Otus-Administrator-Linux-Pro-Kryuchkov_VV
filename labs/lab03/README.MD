@@ -208,7 +208,11 @@ lvs /dev/otus/test
 
 **LVM Snapshot**
 
+```
+lsblk
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/aea749c7-6ba9-4612-8f33-a535e9f81735)
 
 
 
