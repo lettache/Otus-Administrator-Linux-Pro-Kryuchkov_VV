@@ -93,12 +93,51 @@ exportfs -r
 
 ```
 exportfs -s
+exit
 ```
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8d3df634-d94f-438b-8ffa-0f7456368d38)
 
 **Настраиваем клиент NFS**
 
+```
+vagrant ssh nfsc
+su
+```
+```
+yum install nfs-utils 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/bce46ccd-f88b-4e86-812c-ea200fc6f26a)
+
+```
+systemctl enable firewalld --now 
+systemctl status firewalld 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1d3c3af8-c9c2-4898-8a2f-ed897a78a4bb)
+
+```
+systemctl daemon-reload 
+systemctl restart remote-fs.target
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/3976581d-ac01-4220-88d4-31f4556b9aeb)
+
+```
+echo "192.168.56.10:/srv/share/ /mnt nfs vers=3,proto=udp,noauto,x-systemd.automount 0 0" >> /etc/fstab
+```
+
+```
+systemctl daemon-reload 
+systemctl restart remote-fs.target
+```
+
+```
+mount | grep mnt
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/a5228bd3-60a9-41cb-9b74-c9abd3db5ef7)
 
 
 
