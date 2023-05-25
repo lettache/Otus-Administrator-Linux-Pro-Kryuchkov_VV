@@ -23,3 +23,34 @@ vagrant box add centos/7 --provider virtualbox --box version 2004.01 --clean
 ```
 
 **Создаём тестовые виртуальные машины**
+
+```
+vagrant up
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/35e1dbe6-c66f-4295-a34b-210d114913a1)
+
+```
+vagrant ssh nfss
+su
+```
+
+```
+yum install nfs-utils 
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/7bf35215-d899-471c-855c-bad2cffc074f)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
