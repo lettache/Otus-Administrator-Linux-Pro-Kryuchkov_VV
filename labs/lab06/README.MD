@@ -28,6 +28,8 @@ yum-utils \
 gcc
 ```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/eb91aeab-bb70-46de-8904-99cf3e8e7a16)
+
 
 
 
