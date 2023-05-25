@@ -158,6 +158,8 @@ ls
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/da45624e-702d-44c9-9853-cc97922a8627)
 
+**Предварительно проверяем клиент**
+
 ```
 reboot
 vagrant ssh nfsc
@@ -167,6 +169,8 @@ ls
 ```
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/703f6405-4eda-4bc4-95da-2f55a1369e38)
+
+**Проверяем сервер**
 
 ```
 reboot
@@ -201,12 +205,26 @@ showmount -a 192.168.50.10
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8352c22b-2404-4b0a-b9fa-be263dd6966e)
 
+**Проверяем клиент**
 
+```
+reboot
+vagrant ssh nfsc
+su
+showmount -a 192.168.50.10
+cd /mnt/upload
+mount | grep mnt
+ls
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8c059dfc-547d-4ae1-b9db-48d17453fe28)
 
+```
+touch final_check
+ls
+```
 
-
-
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1cec6aeb-264b-473c-b4bb-e55f5c3d64e9)
 
 
 
