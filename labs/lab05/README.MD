@@ -30,6 +30,8 @@ vagrant up
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/35e1dbe6-c66f-4295-a34b-210d114913a1)
 
+**Настраиваем сервер NFS**
+
 ```
 vagrant ssh nfss
 su
