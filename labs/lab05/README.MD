@@ -16,8 +16,10 @@
  
  *настроить аутентификацию через KERBEROS с использованием NFSv4*
 
-
 **Решение:**
 
+```
+vagrant box add centos/7 --provider virtualbox --box version 2004.01 --clean
+```
 
-
+**Создаём тестовые виртуальные машины**
