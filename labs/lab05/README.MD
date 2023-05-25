@@ -118,13 +118,6 @@ systemctl status firewalld
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1d3c3af8-c9c2-4898-8a2f-ed897a78a4bb)
 
 ```
-systemctl daemon-reload 
-systemctl restart remote-fs.target
-```
-
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/3976581d-ac01-4220-88d4-31f4556b9aeb)
-
-```
 echo "192.168.56.10:/srv/share/ /mnt nfs vers=3,proto=udp,noauto,x-systemd.automount 0 0" >> /etc/fstab
 ```
 
@@ -139,19 +132,74 @@ mount | grep mnt
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/a5228bd3-60a9-41cb-9b74-c9abd3db5ef7)
 
+**Проверка работоспособности**
 
+```
+vagrant ssh nfss
+cd /srv/share/upload
+touch check_file
+exit
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/640944ed-fb95-4ad7-a97f-e5ffb0ec6e50)
 
+```
+vagrant ssh nfsc
+cd /mnt/upload
+ls
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f2fd6465-fb19-4bb0-83d8-393d241dfa7e)
 
+```
+touch client_file
+ls
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/da45624e-702d-44c9-9853-cc97922a8627)
 
+```
+reboot
+vagrant ssh nfsc
+su
+cd /mnt/upload
+ls
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/703f6405-4eda-4bc4-95da-2f55a1369e38)
 
+```
+reboot
+vagrant ssh nfss
+su
+ls /srv/share/upload/
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f69a5821-33d5-4b7d-b18c-045e9c760ba1)
 
+```
+systemctl status nfs
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/0ccc5bf0-56db-4c44-8b3c-262eb8a8cd53)
 
+```
+systemctl status firewalld
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/ae4e7a7b-7daf-4422-a6af-1b9cbeaf5f6c)
+
+```
+exportfs -s
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/b8211fe4-9451-4cda-ac83-d6769c056332)
+
+```
+showmount -a 192.168.50.10
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/8352c22b-2404-4b0a-b9fa-be263dd6966e)
 
 
 
