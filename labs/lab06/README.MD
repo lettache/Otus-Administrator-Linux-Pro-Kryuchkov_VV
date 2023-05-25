@@ -55,7 +55,9 @@ yum-builddep rpmbuild/SPECS/nginx.spec
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/7297e03a-b30f-4cc2-8635-d9aecf17f212)
 
-
+```
+vi rpmbuild/SPECS/nginx.spec
+```
 
 
 
