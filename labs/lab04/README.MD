@@ -142,6 +142,33 @@ zfs get checksum otus
 
 **Работа со снапшотом, поиск сообщения от преподавателя**
 
+```
+wget -O otus_task2.file --no-check-certificate "https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download&confirm=yes"
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/e66258cb-26dc-48d4-942c-ed340b895495)
+
+```
+zfs receive otus/test@today < otus_task2.file
+```
+
+```
+find /otus/test -name "secret_message"
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1583b9d6-dd9e-4cf5-a1b6-8c3f2f22c2b9)
+
+```
+cat /otus/test/task1/file_mess/secret_message
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d130662d-deb6-45f8-a3e0-bab63d8c3b90)
+
+
+
+
+
+
 
 
 
