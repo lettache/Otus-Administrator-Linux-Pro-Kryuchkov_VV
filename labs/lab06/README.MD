@@ -78,21 +78,67 @@ systemctl status nginx
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/447d30a9-ba37-4478-ae35-56d6eff6dc13)
 
+**Создать свой репозиторий и разместить там ранее собранный RPM**
+
+```
+mkdir /usr/share/nginx/html/repo
+cp rpmbuild/RPMS/x86_64/nginx-1.14.1-1.el7_4.ngx.x86_64.rpm /usr/share/nginx/html/repo/
 ```
 
 ```
+wget
+https://downloads.percona.com/downloads/percona-distribution-mysql-ps/percona-distribution-mysql-ps-8.0.28/binary/redhat/8/x86_64/percona-orchestrator-3.2.6-2.el8.x86_64.rpm -O /usr/share/nginx/html/repo/percona-orchestrator-3.2.6-2.el8.x86_64.rpm
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/0bd73340-3918-4a6d-ad15-6ccbfe7c19d1)
 
+```
+createrepo /usr/share/nginx/html/repo/
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/87c1727a-e6fa-4cdd-8cba-9c43012f2e84)
 
+```
+vi /etc/nginx/conf.d/default.conf
+```
 
+```
+nginx -t
+nginx -s reload
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d1397fcb-f837-4b63-8317-6289ffc336e6)
 
+```
+curl -a http://localhost/repo/
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/38ab3336-8075-4e18-8a85-4aea2c2b3cb4)
 
+```
+cat >> /etc/yum.repos.d/otus.repo << EOF
+[otus]
+name=otus-linux
+baseurl=http://localhost/repo
+gpgcheck=0
+enabled=1
+EOF
+```
 
+```
+yum repolist enabled | grep otus
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/c8e449ec-4702-4c64-a970-1248fad75286)
 
+```
+yum list | grep otus
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f01ef964-72af-44c5-8290-ef4daa1462d1)
 
+```
+yum install percona-orchestrator.x86_64 -y
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f13bf0d9-7560-4431-9d0e-50158a4c50e3)
