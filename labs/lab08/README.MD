@@ -44,9 +44,20 @@ tail -f /var/log/messages
 ```
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/01d636c3-72cc-49d1-9f6d-2c10f427ae6e)
 
-
-
-
+**Из epel установить spawn-fcgi и переписать init-скрипт на unit-файл. Имя сервиса должно также называться**
+```
+yum install epel-release -y && yum install spawn-fcgi php php-cli mod_fcgid httpd -y
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/1678e6a2-2871-4f9a-a34d-46d6053d480f)
+```
+vi /etc/sysconfig/spawn-fcgi
+vi /etc/systemd/system/spawn-fcgi.service
+```
+```
+systemctl start spawn-fcgi
+systemctl status spawn-fcgi
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/184408d7-c677-4e4d-91f8-892ab470fb64)
 
 
 
