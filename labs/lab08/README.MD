@@ -33,8 +33,16 @@ cat /opt/watchlog.sh
 ```
 chmod +x /opt/watchlog.sh
 ```
-
-
+```
+cd etc/systemd/system/
+vi watchlog.service
+vi watchlog.timer
+```
+```
+systemctl start watchlog.timer
+tail -f /var/log/messages
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/01d636c3-72cc-49d1-9f6d-2c10f427ae6e)
 
 
 
