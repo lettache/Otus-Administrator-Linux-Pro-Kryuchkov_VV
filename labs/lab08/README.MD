@@ -18,7 +18,6 @@ vi /etc/sysconfig/watchlog
 ```
 cat /etc/sysconfig/watchlog
 ```
-
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/a57826bd-af24-4205-8d5c-107a46701d6f)
 
 
