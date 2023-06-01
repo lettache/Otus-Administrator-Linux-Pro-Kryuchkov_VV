@@ -12,7 +12,6 @@ vagrant up
 vagrant ssh
 su
 ```
-
 ```
 vi /etc/sysconfig/watchlog
 ```
