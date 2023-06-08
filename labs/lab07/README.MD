@@ -20,9 +20,31 @@
 ```
 init=/bin/sh
 ```
-![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/7866844a-7706-4c58-8165-1f5551b4ac7c)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/a8cd2490-d364-43db-b7ea-45faf8faa49a)
 
+```
+mount -o remount,rw /
+mount | grep root
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d1ed3647-bced-4853-8c38-800e13571f04)
 
+**Способ 2. rd.break**
+
+```
+rd.break
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/52dc7b89-8a31-425f-9af4-f61c7a8d2267)
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/09ab978a-d133-4783-820b-a81a92fed063)
+
+```
+mount -o remount,rw /sysroot
+chroot /sysroot
+passwd root
+touch /.autorelabel
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/d5854237-c5aa-49ac-9243-976c74569fb0)
+
+**Способ 3. rw init=/sysroot/bin/sh**
 
 
 
