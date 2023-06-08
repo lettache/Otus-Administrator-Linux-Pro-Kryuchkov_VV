@@ -56,6 +56,36 @@ rw init=/sysroot/bin/sh
 
 **Установить систему с LVM, после чего переименовать VG**
 
+```
+vgs
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/9c58f5d3-5180-4ca4-b5d8-720f0a5b02b7)
+
+```
+sudo vgrename cs_centos8s OtusRoot
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/dbf340a0-5bb8-45a8-925c-02816f8c50aa)
+
+```
+sudo vi /etc/fstab
+sudo vi /etc/default/grub
+sudo vi /boot/grub2/grub.cfg
+```
+
+```
+sudo mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/e3edefb6-ecb2-447a-b356-6de3cd8b246d)
+
+
+
+
+
+
+
 
 
 
