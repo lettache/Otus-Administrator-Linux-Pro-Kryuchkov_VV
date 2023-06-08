@@ -59,14 +59,24 @@ systemctl status spawn-fcgi
 ```
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/184408d7-c677-4e4d-91f8-892ab470fb64)
 
+```
+vi /usr/lib/systemd/system/httpd.service
+vi /etc/sysconfig/httpd-first
+vi /etc/sysconfig/httpd-second
+```
+```
+vi /etc/httpd/conf/first.conf
+vi /etc/httpd/conf/second.conf
+```
 
+```
+systemctl start httpd@first
+systemctl start httpd@second
+```
 
-
-
-
-
-
-
+```
+ss -tnulp | grep httpd
+```
 
 
 
