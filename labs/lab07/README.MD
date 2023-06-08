@@ -80,11 +80,19 @@ sudo mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
 
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/e3edefb6-ecb2-447a-b356-6de3cd8b246d)
 
+```
+sudo reboot
+```
 
+```
+vgs
+```
 
+**Добавить модуль в initrd**
 
+```
 
-
+```
 
 
 
