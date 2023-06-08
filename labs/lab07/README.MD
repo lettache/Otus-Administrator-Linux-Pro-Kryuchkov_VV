@@ -46,7 +46,14 @@ touch /.autorelabel
 
 **Способ 3. rw init=/sysroot/bin/sh**
 
+```
+rw init=/sysroot/bin/sh
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/3b909ccf-685a-4b5e-a8ce-5b2883816e2a)
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/9ab7643c-c019-41b1-a8bf-c6bdfbb328d7)
+
+**Установить систему с LVM, после чего переименовать VG**
 
 
 
