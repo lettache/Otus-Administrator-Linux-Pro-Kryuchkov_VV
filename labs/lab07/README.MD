@@ -91,13 +91,33 @@ vgs
 **Добавить модуль в initrd**
 
 ```
-
+cd /usr/lib/dracut/modules.d/
+sudo mkdir 01test
+cd /01test
 ```
 
+```
+sudo vi module-setup.sh
+sudo vi test.sh
+```
 
+```
+sudo mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/cefa0913-ff79-4ebe-abce-6ef59f55204e)
 
+```
+sudo lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
+```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/25473316-e0ce-41da-85f1-6de58b5df763)
+
+```
+sudo vi /boot/grub2/grub.cfg
+```
+
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/edd428b5-c067-46c2-949e-adfced6ea464)
 
 
 
