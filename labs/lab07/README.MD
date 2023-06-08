@@ -34,6 +34,7 @@ mount | grep root
 rd.break
 ```
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/52dc7b89-8a31-425f-9af4-f61c7a8d2267)
+
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/09ab978a-d133-4783-820b-a81a92fed063)
 
 ```
