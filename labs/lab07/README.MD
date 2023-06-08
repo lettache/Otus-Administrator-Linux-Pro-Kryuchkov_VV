@@ -88,6 +88,8 @@ sudo reboot
 vgs
 ```
 
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/f9dd7de8-7b6d-4d67-90f2-b16067fe2727)
+
 **Добавить модуль в initrd**
 
 ```
