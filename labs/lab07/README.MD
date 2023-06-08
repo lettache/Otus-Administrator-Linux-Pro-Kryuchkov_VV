@@ -15,6 +15,12 @@
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/6386d071-a932-4e94-ba8b-8b56c3535448)
 ![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/bd75a191-4bb9-4886-9277-00f6ed6eaea8)
 
+**Способ 1. init=/bin/sh**
+
+```
+init=/bin/sh
+```
+![image](https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/assets/84719218/7866844a-7706-4c58-8165-1f5551b4ac7c)
 
 
 
