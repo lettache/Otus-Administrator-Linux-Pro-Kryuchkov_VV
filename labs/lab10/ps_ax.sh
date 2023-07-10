@@ -36,14 +36,6 @@ _tty(){
   fi
 }
 
-#_tty_raw(){
-#  if [ -f ${PROC_PID}/stat ]; then
-#    cat ${PROC_PID}/stat | rev | awk '{printf $46}' | rev;
-#  else
-#    echo 'n/a'
-#  fi
-#}
-
 _time(){
   if [ -f ${PROC_PID}/stat ]; then
     cat ${PROC_PID}/stat | rev | awk '{print $36" "$37" "$38" "$39}' | rev | awk '{sum=$1+$2+$3+$4}END{print sum/100}' | awk '{("date +%M:%S -d @"$1)| getline $1}1'
@@ -63,8 +55,3 @@ _command(){
 for PROC_PID in `ls -d /proc/* | egrep "^/proc/[0-9]+"`; do
   echo $(_pid) $(_tty) $(_stat) $(_time) $(_command);
 done
-
-# for test
-# PROC_PID=/proc/26446
-# echo $(_tty_raw)
-# echo $(_tty)
