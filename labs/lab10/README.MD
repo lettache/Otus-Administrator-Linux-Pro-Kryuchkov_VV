@@ -73,7 +73,6 @@ _time(){
 
 _command(){
   if [ -f ${PROC_PID}/stat ]; then
-  # предупреждение: подстановка команды: во входных данных проигнорирован нулевой байт
     cat ${PROC_PID}/cmdline | tr '\0' '\n' | sed -e s/DBUS_SESSION_BUS_ADDRESS=//
   else
     echo 'n/a'
