@@ -21,6 +21,8 @@
 
 ```
 Vagrant init centos/7
+vagrant up
+vagrant ssh
 ```
 
 
