@@ -23,7 +23,31 @@
 Vagrant init centos/7
 vagrant up
 vagrant ssh
+sudo -i
 ```
+
+**Запуск nginx на нестандартном порту 3-мя разными способами **
+
+```
+systemctl status firewalld
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
