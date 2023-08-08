@@ -50,7 +50,3 @@ systemctl status firewalld
 
 
 
-
-
-
-
