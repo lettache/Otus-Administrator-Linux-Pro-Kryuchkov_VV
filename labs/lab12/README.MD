@@ -32,8 +32,21 @@ sudo -i
 systemctl status firewalld
 ```
 
+```
+nginx -t
+```
 
+```
+getenforce 
+```
 
+```
+yum install policycoreutils-python
+```
+
+```
+grep 4881 /var/log/audit/audit.log | audit2why
+```
 
 
 
