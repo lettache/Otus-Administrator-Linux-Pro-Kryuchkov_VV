@@ -62,6 +62,8 @@ getsebool -a | grep nis_enabled
 setsebool -P nis_enabled off
 ```
 
+**Теперь разрешим в SELinux работу nginx на порту TCP 4881 c помощью добавления нестандартного порта в имеющийся тип:**
+
 ```
 semanage port -l | grep http
 ```
