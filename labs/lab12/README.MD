@@ -62,7 +62,7 @@ getsebool -a | grep nis_enabled
 setsebool -P nis_enabled off
 ```
 
-**Теперь разрешим в SELinux работу nginx на порту TCP 4881 c помощью добавления нестандартного порта в имеющийся тип:**
+**Разрешим в SELinux работу nginx на порту TCP 4881 c помощью добавления нестандартного порта в имеющийся тип:**
 
 ```
 semanage port -l | grep http
@@ -89,6 +89,82 @@ systemctl status nginx
 ```
 
 **Разрешим в SELinux работу nginx на порту TCP 4881 c помощью формирования и установки модуля SELinux:**
+
+```
+semanage port -l | grep http
+```
+
+```
+semanage port -a -t http_port_t -p tcp 4881
+semanage port -l | grep  http_port_t
+```
+
+```
+systemctl restart nginx
+systemctl status nginx
+```
+
+```
+semanage port -d -t http_port_t -p tcp 4881
+semanage port -l | grep  http_port_t
+```
+
+```
+systemctl restart nginx
+systemctl status nginx
+```
+
+**Разрешим в SELinux работу nginx на порту TCP 4881 c помощью формирования и установки модуля SELinux:**
+
+```
+systemctl start nginx
+```
+
+```
+grep nginx /var/log/audit/audit.log
+```
+
+```
+grep nginx /var/log/audit/audit.log | audit2allow -M nginx
+```
+
+```
+semodule -i nginx.pp
+```
+
+```
+systemctl restart nginx
+systemctl status nginx
+```
+
+```
+semodule -l
+```
+
+```
+semodule -r nginx
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
