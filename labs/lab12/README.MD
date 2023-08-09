@@ -147,14 +147,23 @@ semodule -r nginx
 
 #
 
-**Обеспечение работоспособности приложения при включенном SELinux**
+**2. Обеспечение работоспособности приложения при включенном SELinux**
 
+```
+git clone https://github.com/mbfx/otus-linux-adm.git
+```
 
+```
+cd otus-linux-adm/selinux_dns_problems
+```
 
+```
+vagrant up
+```
 
-
-
-
+```
+vagrant status
+```
 
 
 
