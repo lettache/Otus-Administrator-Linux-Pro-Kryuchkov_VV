@@ -49,6 +49,7 @@ grep 4881 /var/log/audit/audit.log | audit2why
 ```
 
 ```
+<<<<<<< HEAD
 123
 ```
 
@@ -56,6 +57,20 @@ grep 4881 /var/log/audit/audit.log | audit2why
 
 
 
+=======
+setsebool -P nis_enabled on
+systemctl restart nginx
+systemctl status nginx
+```
+
+```
+getsebool -a | grep nis_enabled
+```
+
+```
+setsebool -P nis_enabled off
+```
+>>>>>>> 411a76cda1e92c975e175b1d673dc7f3b6f7576d
 
 
 
