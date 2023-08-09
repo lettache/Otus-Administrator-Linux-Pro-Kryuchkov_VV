@@ -165,9 +165,60 @@ vagrant up
 vagrant status
 ```
 
+```
+vagrant ssh client
+```
 
+```
+nsupdate -k /etc/named.zonetransfer.key
+server 192.168.50.10
+zone ddns.lab
+update add www.ddns.lab. 60 A 192.168.50.15
+send
+quit
+```
 
+```
+sudo -i
+cat /var/log/audit/audit.log | audit2why
+```
 
+```
+vagrant ssh ns01 
+sudo -i
+cat /var/log/audit/audit.log | audit2why
+```
+
+```
+ls -laZ /etc/named
+```
+
+```
+sudo semanage fcontext -l | grep named
+```
+
+```
+sudo chcon -R -t named_zone_t /etc/named
+ls -laZ /etc/named
+```
+
+```
+nsupdate -k /etc/named.zonetransfer.key
+server 192.168.50.10
+zone ddns.lab
+update add www.ddns.lab. 60 A 192.168.50.15
+send
+quit
+```
+
+```
+dig www.ddns.lab
+```
+
+```
+reboot
+dig @192.168.50.10 www.ddns.lab
+```
 
 
 
