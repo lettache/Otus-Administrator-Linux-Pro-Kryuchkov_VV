@@ -26,4 +26,9 @@
 
 **Решение:**
 
+```
+ansible --version
+```
+
+![https://github.com/lettache/Otus-Administrator-Linux-Pro-Kryuchkov_VV/tree/master/labs/lab11/img](image-1.png)
 
