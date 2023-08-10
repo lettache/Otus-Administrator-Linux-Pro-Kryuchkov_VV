@@ -26,5 +26,4 @@
 
 **Решение:**
 
-![Alt text](image.png)
 
