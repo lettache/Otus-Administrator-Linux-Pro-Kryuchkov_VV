@@ -224,7 +224,6 @@ dig @192.168.50.10 www.ddns.lab
 restorecon -v -R /etc/named
 ```
 
-test
 
 
 
