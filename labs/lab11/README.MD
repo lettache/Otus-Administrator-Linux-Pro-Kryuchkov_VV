@@ -59,6 +59,63 @@ ansible nginx -m ping
 
 ![Alt text](image-2.png)
 
+```
+ansible nginx -m command -a "uname -r"
+```
+![Alt text](image-3.png)
+
+```
+ansible nginx -m systemd -a name=firewalld
+```
+![Alt text](image-4.png)
+
+```
+ansible nginx -m yum -a "name=epel-release state=present" -b
+```
+![Alt text](image-5.png)
+
+```
+vim epel.yml
+```
+
+```
+ansible-playbook epel.yml
+```
+![Alt text](image-6.png)
+
+```
+ansible nginx -m yum -a "name=epel-release state=absent" -b
+```
+```
+ansible-playbook epel.yml
+```
+![Alt text](image-7.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
