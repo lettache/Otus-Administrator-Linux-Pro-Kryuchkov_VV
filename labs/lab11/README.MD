@@ -30,5 +30,8 @@
 ansible --version
 ```
 
+```
+vagrant ssh-config
+```
 
 
