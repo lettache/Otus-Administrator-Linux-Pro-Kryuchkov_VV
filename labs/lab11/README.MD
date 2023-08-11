@@ -45,10 +45,19 @@ ansible nginx - hosts -m ping
 
 ![Alt text](image-1.png)
 
+```
+vim ansible.cfg
+```
 
+```
+vim hosts
+```
 
+```
+ansible nginx -m ping
+```
 
-
+![Alt text](image-2.png)
 
 
 
