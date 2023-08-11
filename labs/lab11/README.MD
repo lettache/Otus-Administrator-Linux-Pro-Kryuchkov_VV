@@ -91,43 +91,31 @@ ansible-playbook epel.yml
 ```
 ![Alt text](image-7.png)
 
+```
+vi NGINX.yml
+```
 
+```
+ansible-playbook nginx.yml --list-tags
+```
+![Alt text](image-8.png)
 
+```
+ansible-playbook nginx.yml -t nginx-package
+```
 
+![Alt text](image-9.png)
 
+```
+vi nginx.yml
+```
 
+```
+ansible-playbook nginx.yml
+```
+![Alt text](image-10.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+curl http://192.168.11.150:8080
+```
+![Alt text](image-11.png)
