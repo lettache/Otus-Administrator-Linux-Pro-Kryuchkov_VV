@@ -43,7 +43,7 @@ vim hosts
 ansible nginx - hosts -m ping
 ```
 
-
+![Alt text](image-1.png)
 
 
 
