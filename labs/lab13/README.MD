@@ -10,29 +10,29 @@
 
 **Docker**
 
-Команды которые могут понадобиться:
+* Команды которые могут понадобиться:
+    * docker ps
+    * docker ps -a
+    * docker run -d -p port:port container_name
+    * docker stop container_name
+    * docker logs container_name - вывод логов контейнеров
+    * docker inspect container_name - информация по запущенному контейнеру
+    * docker build -t dockerhub_login/reponame:ver
+    * docker push/pull
+    * docker exec -it container_name bash
 
-docker ps
-docker ps -a
-docker run -d -p port:port container_name
-docker stop container_name
-docker logs container_name - вывод логов контейнеров
-docker inspect container_name - информация по запущенному контейнеру
-docker build -t dockerhub_login/reponame:ver
-docker push/pull
-docker exec -it container_name bash
-
-Что должно быть Dockerfile:
-FROM image name
-RUN apt update -y && apt upgrade -y
-COPY или ADD filename /path/in/image
-EXPOSE portopenning
-CMD or ENTRYPOINT or both
+* Что должно быть Dockerfile:
+    * FROM image name
+    * RUN apt update -y && apt upgrade -y
+    * COPY или ADD filename /path/in/image
+    * EXPOSE portopenning
+    * CMD or ENTRYPOINT or both
 
 #не забываем про разницу между COPY и ADD
 #or - одна из опций на выбор
 
-Задание со * (звездочкой)
+**Задание со * (звездочкой)**
+
 Создайте кастомные образы nginx и php, объедините их в docker-compose.
 После запуска nginx должен показывать php info.
 Все собранные образы должны быть в docker hub
