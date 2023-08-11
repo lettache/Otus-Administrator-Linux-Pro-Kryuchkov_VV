@@ -34,5 +34,33 @@ ansible --version
 vagrant ssh-config
 ```
 
+```
+cd etc/ansible/
+vim hosts
+```
+
+```
+ansible nginx - hosts -m ping
+```
+![Alt text](image.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
