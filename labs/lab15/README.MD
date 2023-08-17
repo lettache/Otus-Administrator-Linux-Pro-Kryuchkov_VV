@@ -60,6 +60,7 @@ chmod +x /usr/local/bin/login.sh
 
 ```
 vi /etc/pam.d/sshd 
+account required pam_exec.so /usr/local/bin/login.sh
 ```
 
 ```
