@@ -177,6 +177,11 @@ vi /etc/audisp/audisp-remote.conf
 ![Alt text](image-21.png)
 
 ```
+vi /etc/audit/auditd.conf
+```
+![Alt text](image-25.png)
+
+```
 service auditd restart
 ```
 ![Alt text](image-23.png)
