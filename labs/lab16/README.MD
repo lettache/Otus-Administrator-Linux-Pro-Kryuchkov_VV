@@ -162,9 +162,9 @@ yum -y install audispd-plugins
 ![Alt text](image-19.png)
 
 ```
-vi /etc/audisp/audispd.conf
+vi /etc/audit/auditd.conf
 ```
-![Alt text](image-22.png)
+![Alt text](image-26.png)
 
 ```
 vi /etc/audisp/plugins.d/au-remote.conf
