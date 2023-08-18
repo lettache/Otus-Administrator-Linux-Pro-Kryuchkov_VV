@@ -36,6 +36,51 @@ vi Vagrantfile
 vagrant up
 ```
 
+```
+vagrant ssh web
+sudo -i
+cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+systemctl restart chronyd
+systemctl status chronyd
+```
+![Alt text](image.png)
+
+```
+yum install -y vim
+```
+
+```
+vagrant ssh log
+sudo -i
+yum install -y vim
+cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+systemctl restart chronyd
+systemctl status chronyd
+```
+![Alt text](image-1.png)
+
+**Установка nginx на виртуальной машине web**
+
+```
+yum install epel-release 
+```
+![Alt text](image-2.png)
+
+```
+yum install -y nginx
+```
+![Alt text](image-3.png)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
