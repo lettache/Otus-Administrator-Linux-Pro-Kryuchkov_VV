@@ -18,3 +18,48 @@
 **Решение**
 
 **Создаём виртуальные машины**
+
+```
+vagrant init centos/7
+vi vagrantfile
+vagrant up
+```
+
+```
+vagrant ssh backup
+sudo -i
+```
+
+```
+yum install epel-release
+```
+![Alt text](image.png)
+
+```
+vagrant ssh client
+sudo -i
+```
+
+```
+yum install epel-release
+```
+![Alt text](image-1.png)
+
+```
+yum install borgbackup
+```
+![Alt text](image-2.png)
+![Alt text](image-3.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
