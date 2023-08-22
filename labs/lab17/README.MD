@@ -51,6 +51,51 @@ yum install borgbackup
 ![Alt text](image-2.png)
 ![Alt text](image-3.png)
 
+```
+useradd borg
+echo "borg" | sudo passwd --stdin borg
+```
+![Alt text](image-4.png)
+
+```
+mkdir /var/backup
+```
+```
+fdisk /dev/sdb
+```
+![Alt text](image-5.png)
+
+```
+fdisk -l /dev/sdb
+```
+![Alt text](image-6.png)
+
+```
+mkfs -t ext4 /dev/sdb1
+```
+![Alt text](image-7.png)
+
+```
+mount -t ext4 /dev/sdb1 /var/backup/
+df -h
+```
+![Alt text](image-8.png)
+
+```
+chown borg:borg /var/backup/
+```
+
+```
+su - borg
+mkdir .ssh
+touch .ssh/authorized_keys
+chmod 700 .ssh
+chmod 600 .ssh/authorized_keys
+```
+
+
+
+
 
 
 
