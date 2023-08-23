@@ -78,20 +78,20 @@ COPY index.html /usr/share/nginx/html/
 
 * Собираем образ
 ```
-docker build -t nginx:1.24.0-alpine-slim .
+docker build -t kryuchkov:nginx .
 ```
-![Alt text](image-1.png)
+![Alt text](image-4.png)
 
 * Запускаем образ
 ```
-docker run -p 8080:80 --name nginx -d --rm nginx:1.24.0-alpine-slim
+docker run -p 8080:80 --name nginx -d --rm kryuchkov:nginx
 ```
 * Проверяем
 ```
 docker ps
 ```
-![Alt text](image-2.png)
-![Alt text](image-3.png)
+![Alt text](image-5.png)
+![Alt text](image-6.png)
 
 
 
