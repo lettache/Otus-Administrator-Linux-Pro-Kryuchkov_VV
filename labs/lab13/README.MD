@@ -93,6 +93,22 @@ docker ps
 ![Alt text](image-5.png)
 ![Alt text](image-6.png)
 
+* Запушим собранный образ на docker hub
+
+```
+docker tag
+docker login -u
+docker push
+```
+
+
+
+
+
+
+
+
+
 
 
 
