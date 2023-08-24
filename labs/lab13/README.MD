@@ -101,21 +101,12 @@ docker login -u
 docker push
 ```
 
+* Ссылка на репозиторий
 
+https://hub.docker.com/layers/kryuchkoff/kryuchkov/nginx/images/sha256-44014a650018c9de754db4740ea7d423db035512bed57e48eacfde22db3ce8a4?context=explore
 
+* Ответы на вопросы
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    * Разница в контейнере и образе заключается в том, что в отличии от RO слоев образа контейнер имеет RW слой для работы приложения
+    * В контейнере можно собрать ядро
 
