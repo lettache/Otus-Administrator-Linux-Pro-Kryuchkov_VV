@@ -55,12 +55,23 @@ yum install httpd
 ```
 wget --no-check-certificate https://mirror.sale-dedic.com/centos/8-stream/isos/x86_64/CentOS-Stream-8-20230904.0-x86_64-dvd1.iso
 ```
+```
+mount -t iso9660 CentOS-Stream-8-20230904.0-x86_64-dvd1.iso /mnt -o loop,ro
+```
+```
+mkdir /iso
+cp -r /mnt/* /iso
+chmod -R 755 /iso
+```
 
+```
+vi /etc/httpd/conf.d/pxeboot.conf
+```
 
-
-
-
-
+```
+systemctl restart httpd
+systemctl enable httpd
+```
 
 
 
