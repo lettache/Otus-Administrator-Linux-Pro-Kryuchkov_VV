@@ -30,10 +30,30 @@ vagrant up
 mkdir ansible
 cd ansible
 vi ansible.cfg
-vi host
+vi hosts
 vi Ansible-playbook provision.yml
 mkdir templates
 mkdir defaults
+```
+
+* Настройка Web-сервера
+
+```
+vagrant ssh pxeserver
+sudo -i
+```
+```
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-*
+```
+
+```
+yum install httpd
+```
+![Alt text](image-1.png)
+
+```
+wget --no-check-certificate https://mirror.sale-dedic.com/centos/8-stream/isos/x86_64/CentOS-Stream-8-20230904.0-x86_64-dvd1.iso
 ```
 
 
