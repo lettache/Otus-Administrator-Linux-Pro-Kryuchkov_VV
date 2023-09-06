@@ -67,12 +67,14 @@ chmod -R 755 /iso
 ```
 vi /etc/httpd/conf.d/pxeboot.conf
 ```
+![Alt text](image-2.png)
 
 ```
 systemctl restart httpd
 systemctl enable httpd
 ```
-
+![Alt text](image-4.png)
+![Alt text](image-3.png)
 
 
 
