@@ -15,4 +15,55 @@
 
 **Решение**
 
+1. Работа с шаблоном из задания
+
+После внесения всех изменений запускаем стэнд
+
+```
+vagrant up
+```
+![Alt text](image.png)
+
+* Для настроки хоста с помощью Ansible нам нужно создать несколько файлов и положить их в отдельную папку (в моём примере имя папки ansible)
+
+```
+mkdir ansible
+cd ansible
+vi ansible.cfg
+vi host
+vi Ansible-playbook provision.yml
+mkdir templates
+mkdir defaults
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
