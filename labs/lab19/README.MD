@@ -106,11 +106,15 @@ systemctl enable tftp.service
 
 * Настройка DHCP-сервера
 
+```
+yum install dhcp-server
+```
+![Alt text](image-7.png)
 
-
-
-
-
+```
+vi /etc/dhcp/dhcpd.conf
+```
+![Alt text](image-8.png)
 
 
 
