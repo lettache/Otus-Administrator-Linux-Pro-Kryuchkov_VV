@@ -125,11 +125,17 @@ systemctl status dhcpd
 
 * Настройка автоматической установки с помощью Kickstart-файла
 
+```
+vi /iso/ks.cfg
+```
+![Alt text](image-12.png)
 
+```
+vi /var/lib/tftpboot/pxelinux.cfg/default 
+```
+![Alt text](image-13.png)
 
-
-
-
+![Alt text](image-14.png)
 
 
 
