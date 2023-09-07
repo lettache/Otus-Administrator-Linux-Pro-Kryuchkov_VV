@@ -136,16 +136,3 @@ vi /var/lib/tftpboot/pxelinux.cfg/default
 ![Alt text](image-13.png)
 
 ![Alt text](image-14.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
