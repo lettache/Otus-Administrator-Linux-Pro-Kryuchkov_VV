@@ -76,6 +76,41 @@ systemctl enable httpd
 ![Alt text](image-4.png)
 ![Alt text](image-3.png)
 
+* Настройка TFTP-сервера
+
+```
+yum install tftp-server
+systemctl start tftp.service
+```
+![Alt text](image-6.png)
+
+```
+mkdir /var/lib/tftpboot/pxelinux.cfg
+vi /var/lib/tftpboot/pxelinux.cfg/default
+```
+
+```
+rpm2cpio /iso/BaseOS/Packages/syslinux-tftpboot-6.04-6.el8.noarch.rpm | cpio -dimv
+```
+
+```
+cd tftpboot
+cp pxelinux.0 ldlinux.c32 libmenu.c32 libutil.c32 menu.c32 vesamenu.c32 /var/lib/tftpboot/
+cp /iso/images/pxeboot/{initrd.img,vmlinuz} /var/lib/tftpboot/
+```
+
+```
+systemctl restart tftp.service
+systemctl enable tftp.service
+```
+
+* Настройка DHCP-сервера
+
+
+
+
+
+
 
 
 
