@@ -114,12 +114,16 @@ yum install dhcp-server
 ```
 vi /etc/dhcp/dhcpd.conf
 ```
-![Alt text](image-8.png)
+![Alt text](image-9.png)
 
+```
+systemctl status dhcpd
+```
+![Alt text](image-10.png)
 
+![Alt text](image-11.png)
 
-
-
+* Настройка автоматической установки с помощью Kickstart-файла
 
 
 
