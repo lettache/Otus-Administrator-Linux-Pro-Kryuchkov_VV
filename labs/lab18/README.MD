@@ -20,7 +20,7 @@
 - 192.168.0.32/28    - office hardware
 - 192.168.0.64/26    - wifi
 
-![Alt text](C:\Users\vlkryuchkov\Documents\GitHub\Otus-Administrator-Linux-Pro-Kryuchkov_VV\Otus-Administrator-Linux-Pro-Kryuchkov_VV\labs\lab18\images\image.png)
+![Alt text](image.png)
 
 Итого должны получиться следующие сервера:
 - inetRouter
