@@ -126,7 +126,7 @@ NAT обычно работает на границе, где локальная
 </thead>
 <tbody>
   <tr>
-    <td class="tg-c3ow" colspan="7">Central Network</td>
+    <td class="tg-7btt" colspan="7">Central Network</td>
   </tr>
   <tr>
     <td class="tg-0pky">Directors</td>
@@ -156,7 +156,7 @@ NAT обычно работает на границе, где локальная
     <td class="tg-0lax">192.168.0.127</td>
   </tr>
   <tr>
-    <td class="tg-baqh" colspan="7">Office 1 network</td>
+    <td class="tg-amwm" colspan="7">Office 1 network</td>
   </tr>
   <tr>
     <td class="tg-0lax">Dev</td>
@@ -195,7 +195,7 @@ NAT обычно работает на границе, где локальная
     <td class="tg-0lax">192.168.2.255</td>
   </tr>
   <tr>
-    <td class="tg-baqh" colspan="7">Office 2 network</td>
+    <td class="tg-amwm" colspan="7">Office 2 network</td>
   </tr>
   <tr>
     <td class="tg-0lax">Dev</td>
@@ -225,7 +225,7 @@ NAT обычно работает на границе, где локальная
     <td class="tg-0lax">192.168.1.255</td>
   </tr>
   <tr>
-    <td class="tg-baqh" colspan="7">InetRouter — CentralRouter network</td>
+    <td class="tg-amwm" colspan="7">InetRouter — CentralRouter network</td>
   </tr>
   <tr>
     <td class="tg-0lax">Inet — central</td>
@@ -238,13 +238,6 @@ NAT обычно работает на границе, где локальная
   </tr>
 </tbody>
 </table>
-
-
-
-
-
-
-
 
 
 
