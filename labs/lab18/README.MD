@@ -115,39 +115,126 @@ NAT обычно работает на границе, где локальная
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky">Сеть</th>
-    <th class="tg-0pky">Маска</th>
-    <th class="tg-0pky">Кол-во адресов</th>
-    <th class="tg-0pky">Кол-во адресов</th>
-    <th class="tg-0pky">№</th>
-    <th class="tg-0pky">Первый адрес в сети</th>
-    <th class="tg-0pky">Последний адрес в сети</th>
-    <th class="tg-0pky">Broadcast — адрес</th>
+    <th class="tg-0pky">Name</th>
+    <th class="tg-0pky">Network</th>
+    <th class="tg-0pky">Netmask</th>
+    <th class="tg-0pky">N</th>
+    <th class="tg-0pky">Hostmin</th>
+    <th class="tg-0pky">Hostmax</th>
+    <th class="tg-0pky">Broadcast</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-c3ow" colspan="8">Central Network</td>
+    <td class="tg-c3ow" colspan="7">Central Network</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Directors</td>
+    <td class="tg-0pky">192.168.0.0/28</td>
+    <td class="tg-0pky">255.255.255.240</td>
+    <td class="tg-0pky">14</td>
+    <td class="tg-0pky">192.168.0.1</td>
+    <td class="tg-0pky">192.168.0.14</td>
+    <td class="tg-0pky">192.168.0.15</td>
   </tr>
   <tr>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
+    <td class="tg-0pky">Office hardware</td>
+    <td class="tg-0pky">192.168.0.32/28</td>
+    <td class="tg-0pky">255.255.255.240</td>
+    <td class="tg-0pky">14</td>
+    <td class="tg-0pky">192.168.0.33</td>
+    <td class="tg-0pky">192.168.0.46</td>
+    <td class="tg-0pky">192.168.0.47</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Wifi(mgt network)</td>
+    <td class="tg-0lax">192.168.0.64/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.0.65</td>
+    <td class="tg-0lax">192.168.0.126</td>
+    <td class="tg-0lax">192.168.0.127</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh" colspan="7">Office 1 network</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Dev</td>
+    <td class="tg-0lax">192.168.2.0/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.2.1</td>
+    <td class="tg-0lax">192.168.2.62</td>
+    <td class="tg-0lax">192.168.2.63</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Test</td>
+    <td class="tg-0lax">192.168.2.64/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.2.65</td>
+    <td class="tg-0lax">192.168.2.126</td>
+    <td class="tg-0lax">192.168.2.127</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Managers</td>
+    <td class="tg-0lax">192.168.2.128/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.2.129</td>
+    <td class="tg-0lax">192.168.2.190</td>
+    <td class="tg-0lax">192.168.2.191</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Office hardware</td>
+    <td class="tg-0lax">192.168.2.192/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.2.193</td>
+    <td class="tg-0lax">192.168.2.254</td>
+    <td class="tg-0lax">192.168.2.255</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh" colspan="7">Office 2 network</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Dev</td>
+    <td class="tg-0lax">192.168.1.0/25</td>
+    <td class="tg-0lax">255.255.255.128</td>
+    <td class="tg-0lax">126</td>
+    <td class="tg-0lax">192.168.1.1</td>
+    <td class="tg-0lax">192.168.1.126</td>
+    <td class="tg-0lax">192.168.1.127</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Test</td>
+    <td class="tg-0lax">192.168.1.128/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.1.129</td>
+    <td class="tg-0lax">192.168.1.190</td>
+    <td class="tg-0lax">192.168.1.191</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Office</td>
+    <td class="tg-0lax">192.168.1.192/26</td>
+    <td class="tg-0lax">255.255.255.192</td>
+    <td class="tg-0lax">62</td>
+    <td class="tg-0lax">192.168.1.193</td>
+    <td class="tg-0lax">192.168.1.254</td>
+    <td class="tg-0lax">192.168.1.255</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh" colspan="7">InetRouter — CentralRouter network</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Inet — central</td>
+    <td class="tg-0lax">192.168.255.0/30</td>
+    <td class="tg-0lax">255.255.255.252</td>
+    <td class="tg-0lax">2</td>
+    <td class="tg-0lax">192.168.255.1</td>
+    <td class="tg-0lax">192.168.255.2</td>
+    <td class="tg-0lax">192.168.255.3</td>
   </tr>
 </tbody>
 </table>
