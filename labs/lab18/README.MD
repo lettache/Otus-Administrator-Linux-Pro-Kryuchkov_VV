@@ -256,8 +256,101 @@ NAT обычно работает на границе, где локальная
 
 ![Alt text](image-2.png)
 
+Рассмотрим схему: 
+- Знак облака означает сеть, которую необходимо будет настроить на сервере
+- Значки роутеров и серверов означают хосты, которые нам нужно будет создать. 
 
+На схеме, мы сразу можем увидеть, что нам потребуется создать дополнительно 2 сети (на схеме обозначены полужирными фиолетовыми линиями):
+- Для соединения office1Router c centralRouter 
+- Для соединения office2Router c centralRouter 
 
+На основании этой схемы мы получаем готовый список серверов. Для более подробного изучения, сделаем новые хосты с другими ОС.
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Server</th>
+    <th class="tg-0lax">IP and Bitmask</th>
+    <th class="tg-0lax">OS</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-baqh" rowspan="2">inetRouter</td>
+    <td class="tg-0lax">Default-NAT address VirtualBox</td>
+    <td class="tg-baqh" rowspan="2">CentOS 7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.255.1/30</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh" rowspan="6">centralRouter</td>
+    <td class="tg-0lax">192.168.255.2/30</td>
+    <td class="tg-0lax" rowspan="6">CentOS 7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.0.1/28</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.0.33/28</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.0.65/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.255.9/30</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.255.5/30</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">centralServer</td>
+    <td class="tg-0lax">192.168.0.2/28</td>
+    <td class="tg-0lax">CentOS 7</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh" rowspan="5">office1Router</td>
+    <td class="tg-0lax">192.168.255.10/30</td>
+    <td class="tg-baqh" rowspan="5">Ubuntu 20</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.2.1/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.2.65/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.2.129/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.2.193/26</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh">office1Server</td>
+    <td class="tg-0lax">192.168.2.130/26</td>
+    <td class="tg-baqh">Ubuntu 20</td>
+  </tr>
+  <tr>
+    <td class="tg-baqh" rowspan="4">office2Router</td>
+    <td class="tg-0lax">192.168.255.6/30</td>
+    <td class="tg-baqh" rowspan="4">Debian 11</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.1.1/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.1.129/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">192.168.1.193/26</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">office2Server</td>
+    <td class="tg-0lax">192.168.1.2/26</td>
+    <td class="tg-baqh">Debian 11</td>
+  </tr>
+</tbody>
+</table>
 
 
 
