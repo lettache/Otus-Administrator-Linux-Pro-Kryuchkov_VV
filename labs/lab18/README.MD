@@ -355,10 +355,48 @@ NAT обычно работает на границе, где локальная
 
 **Настройка NAT**
 
+1. Подключиться по SSH к хосту:
+
+2. Проверить, что отключен другой файервол:
+
 ```
 vagrant ssh inetRouter
 systemctl status firewalld
 ```
+![Alt text](image-3.png)
+
+3. Установить пакеты iptables и iptables-services:
+
+```
+yum -y install iptables iptables-services
+```
+4. Добавить службу iptables в автозапуск: 
+
+```
+systemctl enable iptables
+```
+5. Отредактировать файл /etc/sysconfig/iptables:
+
+```
+vi /etc/sysconfig/iptables
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
