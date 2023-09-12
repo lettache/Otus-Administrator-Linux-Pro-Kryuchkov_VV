@@ -414,10 +414,14 @@ systemctl restart network
 
 **Настройка статических маршрутов**
 
+```
+ip r
+```
+![Alt text](image-10.png)
 
-
-
-
+```
+ip route del 0.0.0.0/0 via 192.168.2.129 
+```
 
 
 
