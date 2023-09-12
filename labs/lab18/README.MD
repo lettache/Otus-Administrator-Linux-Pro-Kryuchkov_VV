@@ -400,9 +400,19 @@ cat /etc/sysconfig/network-scripts/ifcfg-eth0
 sudo echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
 cat /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
+![Alt text](image-7.png)
+![Alt text](image-8.png)
 
+```
+echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+```
+![Alt text](image-9.png)
 
+```
+systemctl restart network
+```
 
+**Настройка статических маршрутов**
 
 
 
