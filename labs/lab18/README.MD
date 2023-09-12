@@ -394,13 +394,13 @@ sysctl net.ipv4.ip_forward
 ```
 cat /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
-![Alt text](image-5.png)
+
 
 ```
-echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+sudo echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
 cat /etc/sysconfig/network-scripts/ifcfg-eth0
 ```
-![Alt text](image-6.png)
+
 
 
 
