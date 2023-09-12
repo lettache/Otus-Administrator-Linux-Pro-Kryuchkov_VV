@@ -381,12 +381,26 @@ systemctl enable iptables
 vi /etc/sysconfig/iptables
 ```
 
+**Маршрутизация транзитных пакетов (IP forward)**
 
+```
+cecho "GATEWAY=192.168.255.9" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+sysctl net.ipv4.ip_forward
+```
+![Alt text](image-4.png)
 
+**Отключение маршрута по умолчанию на интерфейсе eth0**
 
+```
+cat /etc/sysconfig/network-scripts/ifcfg-eth0
+```
+![Alt text](image-5.png)
 
-
-
+```
+echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+cat /etc/sysconfig/network-scripts/ifcfg-eth0
+```
+![Alt text](image-6.png)
 
 
 
