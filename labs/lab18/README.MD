@@ -353,7 +353,12 @@ NAT обычно работает на границе, где локальная
 </table>
 
 
+**Настройка NAT**
 
+```
+vagrant ssh inetRouter
+systemctl status firewalld
+```
 
 
 
