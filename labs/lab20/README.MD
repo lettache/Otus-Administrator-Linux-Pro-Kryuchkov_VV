@@ -16,13 +16,20 @@
 
 Проверка работоспособности knocking port
 
+```
+vagrant ssh centralRouter
+```
 
+```
+ssh vagrant@192.168.255.1
+```
+![Alt text](image.png)
 
-
-
-
-
-
+```
+knock 192.168.255.1 7000 8000 9000
+ssh vagrant@192.168.255.1
+```
+![Alt text](image-1.png)
 
 
 
