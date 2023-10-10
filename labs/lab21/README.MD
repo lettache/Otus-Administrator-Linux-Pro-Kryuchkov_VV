@@ -252,13 +252,21 @@ pathd=no
 - Посмотреть в linux: ip a | grep inet
 
 ```bash
-ip a | grep "inet "
+ip a | grep "inet"
     inet 127.0.0.1/8 scope host lo
+    inet6 ::1/128 scope host 
     inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
+    inet6 fe80::72:baff:fec6:68ac/64 scope link 
+    inet 10.0.10.1/24 brd 10.0.10.255 scope global enp0s8
     inet 10.0.10.1/30 brd 10.0.10.3 scope global enp0s8
+    inet6 fe80::a00:27ff:feb3:f999/64 scope link 
+    inet 10.0.12.1/24 brd 10.0.12.255 scope global enp0s9
     inet 10.0.12.1/30 brd 10.0.12.3 scope global enp0s9
+    inet6 fe80::a00:27ff:fe9c:e1c4/64 scope link 
     inet 192.168.10.1/24 brd 192.168.10.255 scope global enp0s10
+    inet6 fe80::a00:27ff:fee7:4bbf/64 scope link 
     inet 192.168.50.10/24 brd 192.168.50.255 scope global enp0s16
+    inet6 fe80::a00:27ff:fe17:ca0c/64 scope link
 ```
 
 - Зайти в интерфейс FRR и посмотреть информацию об интерфейсах
@@ -393,31 +401,33 @@ systemctl enable frr
 
 ```bash
 systemctl status frr
-
 ● frr.service - FRRouting
      Loaded: loaded (/lib/systemd/system/frr.service; enabled; vendor preset: enabled)
-     Active: active (running) since Wed 2022-07-06 21:08:10 UTC; 12s ago
+     Active: active (running) since Tue 2023-10-10 13:10:41 UTC; 47min ago
        Docs: https://frrouting.readthedocs.io/en/latest/setup.html
-   Main PID: 4819 (watchfrr)
+    Process: 5931 ExecStart=/usr/lib/frr/frrinit.sh start (code=exited, status=0/SUCCESS)
+   Main PID: 5947 (watchfrr)
      Status: "FRR Operational"
-      Tasks: 9 (limit: 1131)
-     Memory: 13.3M
+      Tasks: 10 (limit: 1131)
+     Memory: 17.6M
      CGroup: /system.slice/frr.service
-             ├─4819 /usr/lib/frr/watchfrr -d -F traditional zebra ospfd staticd
-             ├─4837 /usr/lib/frr/zebra -d -F traditional -A 127.0.0.1 -s 90000000
-             ├─4842 /usr/lib/frr/ospfd -d -F traditional -A 127.0.0.1
-             └─4845 /usr/lib/frr/staticd -d -F traditional -A 127.0.0.1
+             ├─5947 /usr/lib/frr/watchfrr -d -F traditional zebra mgmtd ospfd staticd
+             ├─5962 /usr/lib/frr/zebra -d -F traditional -A 127.0.0.1 -s 90000000
+             ├─5967 /usr/lib/frr/mgmtd -d -F traditional
+             ├─5969 /usr/lib/frr/ospfd -d -F traditional -A 127.0.0.1
+             └─5972 /usr/lib/frr/staticd -d -F traditional -A 127.0.0.1
 
-Jul 06 21:08:05 router1 zebra[4837]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
-Jul 06 21:08:05 router1 ospfd[4842]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
-Jul 06 21:08:05 router1 staticd[4845]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
-Jul 06 21:08:05 router1 watchfrr[4819]: [ZJW5C-1EHNT] restart all process 4820 exited with non-zero status 2
-Jul 06 21:08:10 router1 watchfrr[4819]: [QDG3Y-BY5TN] zebra state -> up : connect succeeded
-Jul 06 21:08:10 router1 watchfrr[4819]: [QDG3Y-BY5TN] ospfd state -> up : connect succeeded
-Jul 06 21:08:10 router1 watchfrr[4819]: [QDG3Y-BY5TN] staticd state -> up : connect succeeded
-Jul 06 21:08:10 router1 frrinit.sh[4800]:  * Started watchfrr
-Jul 06 21:08:10 router1 watchfrr[4819]: [KWE5Q-QNGFC] all daemons up, doing startup-complete notify
-Jul 06 21:08:10 router1 systemd[1]: Started FRRouting.
+Oct 10 13:10:36 router1 staticd[5972]: [VTVCM-Y2NW3] Configuration Read in Took: 00:00:00
+Oct 10 13:10:36 router1 frrinit.sh[5992]: [5992|staticd] Configuration file[/etc/frr/frr.conf] processing failure: 2
+Oct 10 13:10:36 router1 watchfrr[5947]: [ZJW5C-1EHNT] restart all process 5948 exited with non-zero status 2
+Oct 10 13:10:41 router1 watchfrr[5947]: [QDG3Y-BY5TN] zebra state -> up : connect succeeded
+Oct 10 13:10:41 router1 watchfrr[5947]: [QDG3Y-BY5TN] ospfd state -> up : connect succeeded
+Oct 10 13:10:41 router1 watchfrr[5947]: [QDG3Y-BY5TN] staticd state -> up : connect succeeded
+Oct 10 13:10:41 router1 frrinit.sh[5931]:  * Started watchfrr
+Oct 10 13:10:41 router1 systemd[1]: Started FRRouting.
+Oct 10 13:10:41 router1 watchfrr[5947]: [QDG3Y-BY5TN] mgmtd state -> up : connect succeeded
+Oct 10 13:10:41 router1 watchfrr[5947]: [KWE5Q-QNGFC] all daemons up, doing startup-complete notify
+
 ```
 
 Если мы правильно настроили OSPF, то с любого хоста нам должны быть доступны сети:
