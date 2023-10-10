@@ -17,8 +17,13 @@
 
 **Решение**
 
+**Запустим стенд Vagrant + Ansible**
 
-
+```
+vagrant up --no-provision
+ANSIBLE_ARGS='--skip-tags="client"' vagrant provision
+ANSIBLE_ARGS='--tags="client"' vagrant provision client
+```
 
 
 
