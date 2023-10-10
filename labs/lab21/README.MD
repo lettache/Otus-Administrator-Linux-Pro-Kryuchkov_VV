@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
             end
         end
     end
-end
+end 
 ```
 
 В данный Vagrantfile уже добавлен модуль запуска Ansible-playbook.
