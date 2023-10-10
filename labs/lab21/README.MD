@@ -445,25 +445,24 @@ Oct 10 13:10:41 router1 watchfrr[5947]: [KWE5Q-QNGFC] all daemons up, doing star
 
 ```bash
 ping 192.168.30.1
-
 PING 192.168.30.1 (192.168.30.1) 56(84) bytes of data.
-64 bytes from 192.168.30.1: icmp_seq=1 ttl=64 time=0.391 ms
-64 bytes from 192.168.30.1: icmp_seq=2 ttl=64 time=0.345 ms
-64 bytes from 192.168.30.1: icmp_seq=3 ttl=64 time=0.608 ms
-64 bytes from 192.168.30.1: icmp_seq=4 ttl=64 time=0.555 ms
+64 bytes from 192.168.30.1: icmp_seq=1 ttl=64 time=0.743 ms
+64 bytes from 192.168.30.1: icmp_seq=2 ttl=64 time=0.958 ms
+64 bytes from 192.168.30.1: icmp_seq=3 ttl=64 time=0.913 ms
+64 bytes from 192.168.30.1: icmp_seq=4 ttl=64 time=0.970 ms
+64 bytes from 192.168.30.1: icmp_seq=5 ttl=64 time=1.02 ms
 ^C
 --- 192.168.30.1 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3072ms
-rtt min/avg/max/mdev = 0.345/0.474/0.608/0.109 ms
+5 packets transmitted, 5 received, 0% packet loss, time 4009ms
+rtt min/avg/max/mdev = 0.743/0.920/1.017/0.094 ms
 ```
 
 - Запустим трассировку до адреса 192.168.30.1
 
 ```bash
 traceroute 192.168.30.1
-
 traceroute to 192.168.30.1 (192.168.30.1), 30 hops max, 60 byte packets
- 1  192.168.30.1 (192.168.30.1)  0.775 ms  0.827 ms  0.807 ms
+ 1  ubuntu22 (192.168.30.1)  0.762 ms  0.685 ms  0.909 ms
 ```
 
 Попробуем отключить интерфейс enp0s9 и немного подождем и снова запустим трассировку до ip-адреса 192.168.30.1
@@ -472,14 +471,14 @@ traceroute to 192.168.30.1 (192.168.30.1), 30 hops max, 60 byte packets
 ifconfig enp0s9 down
 
 ip a | grep enp0s9
-4: enp0s9: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel state DOWN group
-default qlen 1000
+4: enp0s9: <BROADCAST,MULTICAST> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
 
 traceroute 192.168.30.1
 
+traceroute 192.168.30.1
 traceroute to 192.168.30.1 (192.168.30.1), 30 hops max, 60 byte packets
- 1  10.0.10.2 (10.0.10.2)  0.536 ms  0.498 ms  0.484 ms
- 2  192.168.30.1 (192.168.30.1)  1.354 ms  1.337 ms  1.319 ms
+ 1  10.0.10.2 (10.0.10.2)  0.933 ms  0.853 ms  0.814 ms
+ 2  ubuntu22 (192.168.30.1)  1.574 ms  1.311 ms  1.266 ms
 ```
 
 Как мы видим, после отключения интерфейса сеть 192.168.30.0/24 нам остаётся доступна.
@@ -691,15 +690,15 @@ O>* 192.168.30.0/24 [110/200] via 10.0.11.1, enp0s9, weight 1, 00:03:58
 ```bash
 tcpdump -i enp0s9
 
-23:17:23.793254 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 51, length 64
-23:17:24.794375 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 52, length 64
-23:17:25.809719 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 53, length 64
-23:17:26.832828 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 54, length 64
-23:17:27.857653 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 55, length 64
-23:17:28.858986 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 56, length 64
-23:17:29.873955 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 57, length 64
-23:17:30.876495 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 58, length 64
-23:17:31.878297 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 59, length 64
+17:03:23.793254 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 51, length 64
+17:03:24.794375 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 52, length 64
+17:03:25.809719 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 53, length 64
+17:03:26.832828 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 54, length 64
+17:03:27.857653 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 55, length 64
+17:03:28.858986 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 56, length 64
+17:03:29.873955 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 57, length 64
+17:03:30.876495 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 58, length 64
+17:03:31.878297 IP 192.168.10.1 > router2: ICMP echo request, id 8, seq 59, length 64
 ```
 
 > Видим что данный порт только получает ICMP-трафик с адреса 192.168.10.1
@@ -709,16 +708,16 @@ tcpdump -i enp0s9
 ```bash
 tcpdump -i enp0s8
 
-23:19:13.594894 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 159, length 64
-23:19:14.595704 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 160, length 64
-23:19:15.601049 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 161, length 64
-23:19:16.624664 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 162, length 64
-23:19:17.648986 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 163, length 64
-23:19:18.672813 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 164, length 64
-23:19:19.697714 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 165, length 64
-23:19:20.727868 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 166, length 64
-23:19:21.727990 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 167, length 64
-23:19:22.736613 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 168, length 64
+17:08:13.594894 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 159, length 64
+17:08:14.595704 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 160, length 64
+17:08:15.601049 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 161, length 64
+17:08:16.624664 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 162, length 64
+17:08:17.648986 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 163, length 64
+17:08:18.672813 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 164, length 64
+17:08:19.697714 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 165, length 64
+17:08:20.727868 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 166, length 64
+17:08:21.727990 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 167, length 64
+17:08:22.736613 IP router2 > 192.168.10.1: ICMP echo reply, id 8, seq 168, length 64
 ```
 
 > Видим что данный порт только отправляет ICMP-трафик на адрес 192.168.10.1
@@ -812,22 +811,22 @@ exit
 tcpdump -i enp0s9
 
 
-23:37:24.812303 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 34, length 64
-23:37:24.812336 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 34, length 64
-23:37:25.896896 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 35, length 64
-23:37:25.896941 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 35, length 64
-23:37:26.898998 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 36, length 64
-23:37:26.899024 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 36, length 64
-23:37:27.911954 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 37, length 64
-23:37:27.912088 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 37, length 64
-23:37:28.913899 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 38, length 64
-23:37:28.913937 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 38, length 64
-23:37:29.937532 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 39, length 64
-23:37:29.937560 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 39, length 64
-23:37:30.930521 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 40, length 64
-23:37:30.930555 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 40, length 64
-23:37:32.108018 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 41, length 64
-23:37:32.108048 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 41, length 64
+17:37:24.812303 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 34, length 64
+17:37:24.812336 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 34, length 64
+17:37:25.896896 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 35, length 64
+17:37:25.896941 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 35, length 64
+17:37:26.898998 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 36, length 64
+17:37:26.899024 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 36, length 64
+17:37:27.911954 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 37, length 64
+17:37:27.912088 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 37, length 64
+17:37:28.913899 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 38, length 64
+17:37:28.913937 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 38, length 64
+17:37:29.937532 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 39, length 64
+17:37:29.937560 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 39, length 64
+17:37:30.930521 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 40, length 64
+17:37:30.930555 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 40, length 64
+17:37:32.108018 IP 192.168.10.1 > router2: ICMP echo request, id 10, seq 41, length 64
+17:37:32.108048 IP router2 > 192.168.10.1: ICMP echo reply, id 10, seq 41, length 64
 ```
 
 > Теперь мы видим, что трафик между роутерами ходит симметрично.
