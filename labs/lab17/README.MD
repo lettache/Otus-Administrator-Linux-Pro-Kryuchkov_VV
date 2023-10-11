@@ -27,7 +27,7 @@ ANSIBLE_ARGS='--tags="client"' vagrant provision client
 
 - оставим стенд поработать пол часа
 
-- зайдем на виртуалку client и посмотрим лог
+- Смотрим лог на client
 
 ```bash
 vagrant ssh client
@@ -88,7 +88,7 @@ BORG_PASSPHRASE=Otus1234 borg list borg@192.168.50.11:/var/backup/
 etc-2023-10-10_20:56:56              Thu, 2023-10-10 20:56:57 [fe48a53546ae1cbd053c4d45b00d0cdbeaf8d6180fb1c699adf35fa90e164134]
 ```
 
-- посмотрим список файлов
+- смотрим список файлов
 
 ```bash
 BORG_PASSPHRASE=Otus1234 borg list borg@192.168.50.11:/var/backup/::etc-2023-10-10_20:56:56 | head -n 10
