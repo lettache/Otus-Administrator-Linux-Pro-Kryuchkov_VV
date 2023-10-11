@@ -273,8 +273,6 @@ systemctl enable openvpn@server
 /etc/openvpn/pki/private/client.key
 ```
 
-> Файлы рекомендуется расположить в той же директории, что и client.conf
-
 ### Создадим конфигурационный файл клиента client.conf на хост-машине
 
 ```bash
@@ -305,16 +303,15 @@ openvpn --config client.conf
 
 ```bash
 ping -c 4 10.10.10.1
-
 PING 10.10.10.1 (10.10.10.1) 56(84) bytes of data.
-64 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=0.634 ms
-64 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=1.84 ms
-64 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=0.857 ms
-64 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=0.639 ms
+64 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=0.800 ms
+64 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=1.42 ms
+64 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=1.46 ms
+64 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=1.43 ms
 
 --- 10.10.10.1 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3017ms
-rtt min/avg/max/mdev = 0.634/0.994/1.847/0.500 ms
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 0.800/1.279/1.460/0.280 ms
 ```
 
 ### Также проверяем командой ip r (netstat -rn) на хостовой машине, что сеть туннеля импортирована в таблицу маршрутизации
