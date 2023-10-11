@@ -10,7 +10,7 @@
 
 - Поднять RAS на базе OpenVPN с клиентскими сертификатами, подключиться с локальной машины на виртуалку
 
-
+**Решение**
 
 ## TUN/TAP режимы VPN
 
@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
 end
 ```
 
-Можно использовать готовый playbook, который раскатает сервер и клиент OpenVPN дополнив наш Vagrantfile
+Используется playbook, который поднимет сервер и клиент OpenVPN
 
 ```bash
     config.vm.provision "ansible" do |ansible|
@@ -70,7 +70,7 @@ yum install -y openvpn iperf3
 setenforce 0
 ```
 
-> Работает до ребута
+Работает до ребута
 
 ### Настройка openvpn сервера
 
@@ -140,22 +140,21 @@ iperf3 -s &
 
 ```bash
 iperf3 -c 10.10.10.1 -t 40 -i 5
-
 Connecting to host 10.10.10.1, port 5201
-[  4] local 10.10.10.2 port 48054 connected to 10.10.10.1 port 5201
+[  4] local 10.10.10.2 port 35338 connected to 10.10.10.1 port 5201
 [ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
-[  4]   0.00-5.00   sec   112 MBytes   188 Mbits/sec   56    626 KBytes       
-[  4]   5.00-10.00  sec   115 MBytes   193 Mbits/sec    5    630 KBytes       
-[  4]  10.00-15.00  sec   114 MBytes   191 Mbits/sec    0    690 KBytes       
-[  4]  15.00-20.00  sec   113 MBytes   189 Mbits/sec    0    801 KBytes       
-[  4]  20.00-25.00  sec   111 MBytes   187 Mbits/sec   10    995 KBytes       
-[  4]  25.00-30.01  sec   114 MBytes   192 Mbits/sec    0   1.24 MBytes       
-[  4]  30.01-35.01  sec   109 MBytes   184 Mbits/sec    1   1.05 MBytes       
-[  4]  35.01-40.00  sec   112 MBytes   188 Mbits/sec    0   1.07 MBytes       
+[  4]   0.00-5.00   sec   200 MBytes   336 Mbits/sec  251    641 KBytes       
+[  4]   5.00-10.00  sec   210 MBytes   352 Mbits/sec    0    841 KBytes       
+[  4]  10.00-15.00  sec   209 MBytes   351 Mbits/sec    0   1000 KBytes       
+[  4]  15.00-20.00  sec   207 MBytes   347 Mbits/sec    0   1.21 MBytes       
+[  4]  20.00-25.00  sec   207 MBytes   347 Mbits/sec    9   1.21 MBytes       
+[  4]  25.00-30.01  sec   210 MBytes   351 Mbits/sec    1   1.03 MBytes       
+[  4]  30.01-35.00  sec   207 MBytes   348 Mbits/sec  156    885 KBytes       
+[  4]  35.00-40.01  sec   210 MBytes   351 Mbits/sec    0   1.06 MBytes       
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bandwidth       Retr
-[  4]   0.00-40.00  sec   901 MBytes   189 Mbits/sec   72             sender
-[  4]   0.00-40.00  sec   898 MBytes   188 Mbits/sec                  receiver
+[  4]   0.00-40.01  sec  1.62 GBytes   348 Mbits/sec  417             sender
+[  4]   0.00-40.01  sec  1.62 GBytes   347 Mbits/sec                  receiver
 
 iperf Done.
 ```
@@ -164,25 +163,23 @@ iperf Done.
 
 ```bash
 Connecting to host 10.10.10.1, port 5201
-[  4] local 10.10.10.2 port 48058 connected to 10.10.10.1 port 5201
+[  4] local 10.10.10.2 port 35346 connected to 10.10.10.1 port 5201
 [ ID] Interval           Transfer     Bandwidth       Retr  Cwnd
-[  4]   0.00-5.01   sec   113 MBytes   190 Mbits/sec   78    433 KBytes       
-[  4]   5.01-10.00  sec   118 MBytes   198 Mbits/sec    0    599 KBytes       
-[  4]  10.00-15.00  sec   119 MBytes   199 Mbits/sec  130    445 KBytes       
-[  4]  15.00-20.01  sec   117 MBytes   195 Mbits/sec    0    601 KBytes       
-[  4]  20.01-25.01  sec   115 MBytes   194 Mbits/sec    1    617 KBytes       
-[  4]  25.01-30.01  sec   115 MBytes   193 Mbits/sec  281    469 KBytes       
-[  4]  30.01-35.00  sec   116 MBytes   196 Mbits/sec    0    622 KBytes       
-[  4]  35.00-40.01  sec   112 MBytes   188 Mbits/sec    3    632 KBytes       
+[  4]   0.00-5.01   sec   204 MBytes   341 Mbits/sec   29   1.23 MBytes       
+[  4]   5.01-10.00  sec   209 MBytes   350 Mbits/sec    1   1.05 MBytes       
+[  4]  10.00-15.00  sec   208 MBytes   350 Mbits/sec    0   1.13 MBytes       
+[  4]  15.00-20.01  sec   208 MBytes   349 Mbits/sec    2   1.16 MBytes       
+[  4]  20.01-25.01  sec   208 MBytes   349 Mbits/sec    0   1.21 MBytes       
+[  4]  25.01-30.00  sec   207 MBytes   348 Mbits/sec    2   1.02 MBytes       
+[  4]  30.00-35.01  sec   206 MBytes   345 Mbits/sec    0   1.08 MBytes       
+[  4]  35.01-40.00  sec   208 MBytes   350 Mbits/sec    0   1.21 MBytes       
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bandwidth       Retr
-[  4]   0.00-40.01  sec   925 MBytes   194 Mbits/sec  493             sender
-[  4]   0.00-40.01  sec   924 MBytes   194 Mbits/sec                  receiver
+[  4]   0.00-40.00  sec  1.62 GBytes   348 Mbits/sec   34             sender
+[  4]   0.00-40.00  sec  1.62 GBytes   348 Mbits/sec                  receiver
 
 iperf Done.
 ```
-
-> В tun режиме чуть быстрее при проведение теста на виртуалках, но и много потерь пакетов.
 
 ## RAS на базе OpenVPN
 
