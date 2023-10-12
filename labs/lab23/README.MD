@@ -467,7 +467,7 @@ ns02.dns.lab.           3600    IN      A       192.168.50.11
 
 ;; Query time: 0 msec
 ;; SERVER: 192.168.50.10#53(192.168.50.10)
-;; WHEN: Tue May 17 08:12:23 UTC 2022
+;; WHEN: Tue Oct 12 10:12:23 UTC 2023
 ;; MSG SIZE  rcvd: 127
 ```
 
@@ -501,7 +501,7 @@ ns02.dns.lab.           3600    IN      A       192.168.50.11
 
 ;; Query time: 1 msec
 ;; SERVER: 192.168.50.11#53(192.168.50.11)
-;; WHEN: Tue May 17 08:16:40 UTC 2022
+;; WHEN: Tue Oct 12 10:16:40 UTC 2023
 ;; MSG SIZE  rcvd: 127
 ```
 
@@ -691,7 +691,7 @@ acl client2 { !key client-key; key client2-key; 192.168.50.16; };
 В данном блоке access листов мы выделяем 2 блока:
 
 - client имеет адрес 192.168.50.15, использует client-key и не использует client2-key
-- client2 имеет адрес 192ю168.50.16, использует clinet2-key и не использует client-key
+- client2 имеет адрес 192.168.50.16, использует clinet2-key и не использует client-key
 
 Описание ключей и access листов будет одинаковое для master и slave сервера.
 
