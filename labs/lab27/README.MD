@@ -1,6 +1,6 @@
-# Репликация mysql
+# MySQL репликация
 
-- Разворачивает виртуалки в Vagrant (master,slave) с установкой mysql версии 5.7
+- Разворачиваеим виртуалки в Vagrant (master,slave) с установкой mysql версии 5.7
 
 ```bash
 vagrant up
