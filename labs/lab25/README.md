@@ -1,4 +1,4 @@
-# HW-25 - LDAP
+# LDAP
 
 - Написан Ansible [playbook](./ansible/provision.yml) для конфигурации сервера и клиента
 - Настроена аутентификация по SSH-ключам
