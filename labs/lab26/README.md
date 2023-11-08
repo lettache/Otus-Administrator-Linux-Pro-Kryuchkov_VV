@@ -42,8 +42,8 @@ vagrant up
 
 - 127.0.0.1:8082 <- flask
 
-![img](./8082.png)
+![Alt text](image.png)
 
 - 127.0.0.1:8083 -< js
 
-![img](./8083.png)
+![Alt text](image-1.png)
