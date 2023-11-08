@@ -1,10 +1,10 @@
 Vagrant.configure(2) do |config|
     config.vm.provision "ansible" do |ansible|
-        ansible.playbook = "prov.yml"
+        ansible.playbook = "provision.yml"
     end
 
     config.vm.define "DynamicWeb" do |vmconfig|
-        vmconfig.vm.box = 'bento/ubuntu-20.04'
+        vmconfig.vm.box = 'ubuntu/focal64'
         vmconfig.vm.hostname = 'DynamicWeb'
 
         vmconfig.vm.network "forwarded_port", guest: 8081, host: 8081
