@@ -38,7 +38,7 @@ vagrant up
 
 - 127.0.0.1:8081 <- wordpress
 
-![img](./8081.png)
+![Alt text](image-2.png)
 
 - 127.0.0.1:8082 <- flask
 
