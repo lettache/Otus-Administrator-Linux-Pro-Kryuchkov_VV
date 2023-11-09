@@ -56,21 +56,7 @@ cn: Ivan Ivanov
 - Предустановленный BIND с хранилищем зон в LDAP
 - Web-консоль управления
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Решение
 
 - Написан Ansible [playbook](./ansible/provision.yml) для конфигурации сервера и клиента
 - Настроена аутентификация по SSH-ключам
@@ -87,7 +73,7 @@ vagrant provision ipaserver
 
 ```bash
 vagrant ssh ipaclient 
-Last login: Sat Jun 18 17:07:03 2022 from 10.0.2.2
+Last login: Wen Nov 08 19:20:03 2023 from 10.0.2.2
 [vagrant@ipaclient ~]$ ssh test_user@localhost
 Creating home directory for test_user.
 [test_user@ipaclient ~]$
