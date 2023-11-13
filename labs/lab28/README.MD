@@ -359,7 +359,85 @@ barman ansible_host=192.168.57.13 ansible_user=vagrant ansible_ssh_private_key_f
 - install_postgres
 - postgres_replication
 
+Создадим роль install_postgres: ```ansible-galaxy init install_postgres```
 
+В каталоге tasks создаём файл main.yml и добавляем в него следующее содержимое: 
+
+```bash
+---
+# Отключаем firewalld и удаляем его из автозагрузки
+  - name: disable firewalld service
+    service:
+      name: firewalld
+      state: stopped
+      enabled: false
+  
+  # Отключаем SElinux 
+  - name: Disable SELinux
+    selinux:
+      state: disabled
+  
+  # Отключаем SElinux после перезагрузки
+  - name: Ensure SELinux is set to disable mode
+    lineinfile:
+      path: /etc/selinux/config
+      regexp: '^SELINUX='
+      line: SELINUX=disabled
+
+  # Добавляем репозиторий postgres
+  - name: install repo
+    dnf:
+      name: 'https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm'
+      state: present
+  
+  # Отключаем старый модуль
+  - name: disable old postgresql module
+    shell: dnf -qy module disable postgresql
+  
+  # Устанавливаем postgresql14-server
+  - name: install postgresql-server 14
+    dnf: 
+      name: postgresql14-server
+      state: present
+      update_cache: true
+  
+  # Проверяем, что postgres на хосте ещё не инициализирован
+  - name: check init 
+    stat:
+      path: /var/lib/pgsql/14/data/pg_stat
+    register: stat_result
+
+  # Выполняем инициализацию postgres
+  - name: initialization setup
+    shell: sudo /usr/pgsql-14/bin/postgresql-14-setup initdb
+    when: not stat_result.stat.exists
+  
+  # Запускаем postgresql-14
+  - name: enable and start service
+    service:
+      name: postgresql-14
+      state: started
+      enabled: true
+```
+
+Далее, создаём роль **postgres_replication**: ```ansible-galaxy init postgres_replication```
+
+В каталоге defaults создаём файл main.yml со следующими переменными: 
+
+---
+# defaults file for postgres_replicationz
+replicator_password: 'Otus2022!'
+master_ip: '192.168.57.11'
+slave_ip: '192.168.57.12'
+
+Данные переменные требуются для темплейтов и выполнения некоторых модулей. 
+
+В каталоге templates создадим файлы: 
+- pg_hba.conf.j2
+- postgresql.conf.j2
+Содержимое файлов было представлено ранее в методичке, так как мы используем темплейты, вместо ip-адресов будут указанные переменные из файла **defaults/main.yml**
+
+В каталоге tasks создаём файл main.yml со следующим содержимым: 
 
 
 
