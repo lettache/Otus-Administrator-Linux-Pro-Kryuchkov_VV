@@ -153,3 +153,18 @@ yum install -y vim telnet
 
 Команды должны выполняться от root-пользователя
 Для перехода в root-пользователя вводим sudo -i
+
+**Настройка hot_standby репликации с использованием слотов**
+
+Перед настройкой репликации необходимо установить postgres-server на хосты node1 и node2:
+
+1) Добавим postgres репозиторий: ```sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm```
+2) Исключаем старый postgresql модуль: ```yum -qy module disable postgresql```
+3) Устанавливаем postgresql-server 14: ```yum install -y postgresql14-server```
+4) Выполняем инициализацию кластера: ```sudo /usr/pgsql-14/bin/postgresql-14-setup initdb```
+5) Запускаем postgresql-server: ```systemctl start postgresql-14```
+6) Добавляем postgresql-server в автозагрузку:  ```systemctl enable postgresql-14```
+
+
+
+
