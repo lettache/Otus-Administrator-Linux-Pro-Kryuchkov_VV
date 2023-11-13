@@ -255,10 +255,66 @@ host    replication replication    192.168.57.12/32        scram-sha-256
 3) В файле  var/lib/pgsql/14/data/postgresql.conf меняем параметр: ```listen_addresses = 'localhost, 192.168.57.12' ```
 4) Запускаем службу postgresql-server: systemctl ```start postgresql-14.service```
 
+Проверка репликации: 
+На хосте node1 в psql создадим базу otus_test и выведем список БД: 
 
+```
+sudo -u postgres psql
+```
 
+```bash
+postgres=# CREATE DATABASE otus_test;
+CREATE DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ otus_test | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(4 rows)
 
+postgres=# 
+```
 
+На хосте node2 также в psql также проверим список БД (команда \l), в списке БД должна появится БД otus_test. 
+
+```bash
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ otus_test | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(4 rows)
+
+postgres=# 
+```
+
+**Настройка hot_standby репликации с использованием слотов с помощью ansible**
+
+В каталоге с нашей лабораторной работой создадим каталог Ansible: mkdir ansible
+В каталоге ansible создадим файл hosts со следующими параметрами:
+
+```bash
+[servers]
+node1 ansible_host=192.168.57.11 ansible_user=vagrant ansible_ssh_private_key_file=./.vagrant/machines/node1/virtualbox/private_key 
+node2 ansible_host=192.168.57.12 ansible_user=vagrant ansible_ssh_private_key_file=./.vagrant/machines/node2/virtualbox/private_key 
+barman ansible_host=192.168.57.13 ansible_user=vagrant ansible_ssh_private_key_file=./.vagrant/machines/barman/virtualbox/private_key 
+```
+
+Файл содержит группу servers в которой прописаны 3 хоста: 
+- node1
+- node2
+- barman
+Также указаны и ip-адреса, имя пользователя от которого будет логин и ssh-ключ.
 
 
 
