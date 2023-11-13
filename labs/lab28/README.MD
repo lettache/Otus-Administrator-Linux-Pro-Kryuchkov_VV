@@ -316,6 +316,48 @@ barman ansible_host=192.168.57.13 ansible_user=vagrant ansible_ssh_private_key_f
 - barman
 Также указаны и ip-адреса, имя пользователя от которого будет логин и ssh-ключ.
 
+Далее создадим файл provision.yml в котором непосредственно будет выполняться настройка клиентов: 
+```bash
+- name: Postgres
+  hosts: all
+  become: yes
+  tasks:
+  #Устанавливаем vim и telnet (для более удобной работы с хостами)
+  - name: install base tools
+    dnf:
+      name:
+        - vim
+        - telnet
+      state: present
+      update_cache: true
+
+#Запуск ролей install_postgres и postgres_replication на хостах node1 и node2
+- name: install postgres 14 and set up replication
+  hosts: node1,node2
+  become: yes
+  roles:
+   - install_postgres
+   - postgres_replication
+
+#Запуск роли install_barman на всех хостах
+- name: set up backup
+  hosts: all
+  become: yes
+  roles:
+   - install_barman
+```
+
+В файле provision.yml мы видим модули запуска ролей. Для того, чтобы создать роль, находясь в каталоге ansible, нужно ввести команду: ansible-galaxy init <имя_роли> 
+После выполнения команды в каталоге ansible будет создан каталог с именем роли, в нём автоматически будут созданны каталоги. Рассмотрим каталоги, которые будут использоваться в нашей методичке: 
+- **defaults** — каталог, в котором могут находится дефолтные значения
+- **tasks** — каталог, в котором содержатся ansible плейбуки, первым всегда запускается плейбук с именем main.yml
+- **templates** — каталог в котором содержатся черновики, которые будут использоваться в настройке конфигурации
+- **README.md** — файл-руководство,  в нём обычно указана важная информация о роли и/или пример запуска
+Более подробно изучить информацию о ролях можно в документации Ansible.
+
+Для настройки репликации у нас используются 2 роли: 
+- install_postgres
+- postgres_replication
 
 
 
