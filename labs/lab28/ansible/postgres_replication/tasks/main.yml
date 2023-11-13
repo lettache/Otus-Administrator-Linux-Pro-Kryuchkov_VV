@@ -1,2 +1,95 @@
 ---
-# tasks file for postgres_replication
+# Установка python-пакетов для модулей psql
+  - name: install base tools
+    dnf:
+      name:
+        - python3-pexpect.noarch
+        - python3-psycopg2
+      state: present
+      update_cache: true
+
+#CREATE USER replicator WITH REPLICATION Encrypted PASSWORD 'Otus2022!';
+  - name: Create replicator user
+    become_user: postgres
+    postgresql_user:
+      name: replication
+      password: '{{ replicator_password }}'
+      role_attr_flags: REPLICATION 
+    ignore_errors: true
+    when: (ansible_hostname == "node1")
+
+  #Остановливаем postgresql-14 на хосте node2
+  - name: stop postgresql-server on node2
+    service: 
+      name: postgresql-14
+      state: stopped
+    when: (ansible_hostname == "node2")
+
+  #Копиуем конфигурационный файл postgresql.conf
+  - name: copy postgresql.conf
+    template:
+      src: postgresql.conf.j2
+      dest: /var/lib/pgsql/14/data/postgresql.conf
+      owner: postgres
+      group: postgres
+      mode: '0600'
+    when: (ansible_hostname == "node1")
+  
+  #Копиуем конфигурационный файл pg_hba.conf
+  - name: copy pg_hba.conf
+    template:
+      src: pg_hba.conf.j2
+      dest: /var/lib/pgsql/14/data/pg_hba.conf
+      owner: postgres
+      group: postgres
+      mode: '0600'
+    when: (ansible_hostname == "node1")
+   #Перезапускаем службу  postgresql-14
+  - name: restart postgresql-server on node1
+    service: 
+      name: postgresql-14
+      state: restarted
+    when: (ansible_hostname == "node1")
+
+  #Удаляем содержимое каталога /var/lib/pgsql/14/data/
+  - name: Remove files from data catalog
+    file:
+      path: /var/lib/pgsql/14/data/
+      state: absent
+    when: (ansible_hostname == "node2")
+
+  #Копируем данные с node1 на node2
+  - name: copy files from master to slave
+    become_user: postgres
+    expect:
+      command: 'pg_basebackup -h {{ master_ip }} -U  replication -p 5432 -D /var/lib/pgsql/14/data/ -R -P'
+      responses: 
+        '.*Password*': "{{ replicator_password }}"
+    when: (ansible_hostname == "node2")
+
+  #Копируем конфигурационный файл postgresql.conf
+  - name: copy postgresql.conf
+    template:
+      src: postgresql.conf.j2
+      dest: /var/lib/pgsql/14/data/postgresql.conf
+      owner: postgres
+      group: postgres
+      mode: '0600'
+    when: (ansible_hostname == "node2")
+
+  #Копируем конфигурационный файл pg_hba.conf
+  - name: copy pg_hba.conf
+    template:
+      src: pg_hba.conf.j2
+      dest: /var/lib/pgsql/14/data/pg_hba.conf
+      owner: postgres
+      group: postgres
+      mode: '0600'
+    when: (ansible_hostname == "node2")
+   
+  #Запускаем службу postgresql-14 на хосте node2
+  - name: start postgresql-server on node2
+    service: 
+      name: postgresql-14
+      state: started
+    when: (ansible_hostname == "node2")
