@@ -584,7 +584,12 @@ cat ~/.ssh/id_rsa.pub
 ```
 Копируем содержимое файла на сервер **barman** в файл **/var/lib/barman/.ssh/authorized_keys**
 
-9) В psql создаём пользователя barman c правами суперпользователя: ```CREATE USER barman WITH REPLICATION Encrypted PASSWORD 'Otus2022!';```
+9) В psql создаём пользователя barman c правами суперпользователя: 
+```bash
+postgres=# CREATE USER barman WITH REPLICATION Encrypted PASSWORD 'Otus2022!';
+CREATE ROLE
+postgres=#
+```
 
 10) В файл /var/lib/pgsql/14/data/pg_hba.conf добавляем разрешения для пользователя barman: 
 ```bash
@@ -607,14 +612,133 @@ host    replication   barman       192.168.57.13/32        scram-sha-256
 ```
 
 11) Перезапускаем службу postgresql-14: ```systemctl restart postgresql-14```
-12) В psql создадим тестовую базу otus: ```CREATE DATABASE otus;```
+12) В psql создадим тестовую базу otus: 
+```bash
+postgres=# CREATE DATABASE otus;
+CREATE DATABASE
+postgres=# 
+```
 13) В базе создаём таблицу test в базе otus: 
 ```bash
-\c otus; 
-CREATE TABLE test (id int, name varchar(30));
-INSERT INTO test VALUES (1, alex); 
+postgres=# \c otus; 
+You are now connected to database "otus" as user "postgres".
+otus=# CREATE TABLE test (id int, name varchar(30));
+CREATE TABLE
+otus=# INSERT INTO test VALUES (1, alex); 
+ERROR:  column "alex" does not exist
+LINE 1: INSERT INTO test VALUES (1, alex);
+                                    ^
+otus=# 
 ```
 
+**На хосте barman:**
+
+14) После генерации ключа, выводим содержимое файла ~/.ssh/id_rsa.pub: 
+cat ~/.ssh/id_rsa.pub 
+Копируем содержимое файла на сервер postgres в файл /var/lib/pgsql/.ssh/authorized_keys
+
+15) Находясь в пользователе barman создаём файл ~/.pgpass со следующим содержимым: ```192.168.57.11:5432:*:barman:Otus2022!```
+
+В данном файле указываются реквизиты доступа для postgres. Через знак двоеточия пишутся следующие параметры: 
+
+- ip-адрес
+- порт postgres
+- имя БД (* означает подключение к любой БД)
+- имя пользователя
+- пароль пользователя
+Файл должен быть с правами 600, владелец файла barman. 
+
+```bash
+chmod 0600 ~/.pgpass
+```
+
+```bash
+bash-4.4$ psql -h 192.168.57.11 -U barman -d postgres 
+could not change directory to "/root": Permission denied
+psql (14.10)
+Type "help" for help.
+
+postgres=>
+```
+
+16) После создания postgres-пользователя barman необходимо проверить, что права для пользователя настроены корректно: 
+
+Проверяем возможность подключения к postgres-серверу: 
+```bash
+bash-4.4$ psql -h 192.168.57.11 -U barman -d postgres 
+could not change directory to "/root": Permission denied
+psql (14.10)
+Type "help" for help.
+
+postgres=> \q
+bash-4.4$ 
+```
+
+
+
+Проверяем репликацию: 
+
+```bash
+bash-4.4$ psql -h 192.168.57.11 -U barman -c "IDENTIFY_SYSTEM" replication=1
+could not change directory to "/root": Permission denied
+      systemid       | timeline |  xlogpos  | dbname 
+---------------------+----------+-----------+--------
+ 7300903082267960146 |        1 | 0/1712380 | 
+(1 row)
+
+bash-4.4$ 
+```
+
+17) Создаём файл /etc/barman.conf со следующим содержимым 
+ Владельцем файла должен быть пользователь barman.
+
+```bash
+[barman]
+#Указываем каталог, в котором будут храниться бекапы
+barman_home = /var/lib/barman
+#Указываем каталог, в котором будут храниться файлы конфигурации бекапов
+configuration_files_directory = /etc/barman.d
+#пользователь, от которого будет запускаться barman
+barman_user = barman
+#расположение файла с логами
+log_file = /var/log/barman/barman.log
+#Используемый тип сжатия
+compression = gzip
+#Используемый метод бекапа
+backup_method = rsync
+archiver = on
+retention_policy = REDUNDANCY 3
+immediate_checkpoint = true
+#Глубина архива
+last_backup_maximum_age = 4 DAYS
+minimum_redundancy = 1
+```
+18) Создаём файл /etc/barman.d/node1.conf со следующим содержимым 
+ Владельцем файла должен быть пользователь barman.
+ 
+ ```bash
+[node1]
+#Описание задания
+description = "backup node1"
+#Команда подключения к хосту node1
+ssh_command = ssh postgres@192.168.57.11 
+#Команда для подключения к postgres-серверу
+conninfo = host=192.168.57.11 user=barman port=5432 dbname=postgres
+retention_policy_mode = auto
+retention_policy = RECOVERY WINDOW OF 7 days
+wal_retention_policy = main
+streaming_archiver=on
+#Указание префикса, который будет использоваться как $PATH на хосте node1
+path_prefix = /usr/pgsql-14/bin/
+#настройки слота
+create_slot = auto
+slot_name = node1
+#Команда для потоковой передачи от postgres-сервера
+streaming_conninfo = host=192.168.57.11 user=barman 
+#Тип выполняемого бекапа
+backup_method = postgres
+archiver = off
+```
 
 
 
