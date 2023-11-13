@@ -548,6 +548,13 @@ slave_ip: '192.168.57.12'
 
 На хосте barman выполняем следующие настройки: 
 1) *предварительно отключаем firewalld и SElinux
+```bash
+systemctl stop firewalld
+systemctl disable firewalld
+setenforce 0
+Правим параметр SELINUX=disabled в файле /etc/selinux/config
+```
+
 2) Устанавливаем epel-release: ```dnf install epel-release -y``` 
 3) Добавим postgres репозиторий: ```sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm```
 4) Исключаем старый postgresql модуль: ```yum -qy module disable postgresql```
