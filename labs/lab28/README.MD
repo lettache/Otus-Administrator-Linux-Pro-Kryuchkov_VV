@@ -140,4 +140,16 @@ end
 vagrant up
 ```
 
+На всех хостах предварительно должны быть выключены firewalld и SElinux:
+- Отключаем службу firewalld:  ```systemctl stop firewalld```
+- Удаляем службу из автозагрузки: ```systemctl disable firewalld```
+- Отключаем SElinux: ```setenforce 0```
+- Правим параметр SELINUX=disabled в файле /etc/selinux/config 
 
+Для удобства на все хосты можно установить текстовый редактор vim и утилиту telnet: 
+```bash 
+yum install -y vim telnet
+```
+
+Команды должны выполняться от root-пользователя
+Для перехода в root-пользователя вводим sudo -i
