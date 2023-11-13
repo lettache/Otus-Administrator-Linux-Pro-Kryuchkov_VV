@@ -424,11 +424,13 @@ barman ansible_host=192.168.57.13 ansible_user=vagrant ansible_ssh_private_key_f
 
 В каталоге defaults создаём файл main.yml со следующими переменными: 
 
+```bash
 ---
 # defaults file for postgres_replicationz
 replicator_password: 'Otus2022!'
 master_ip: '192.168.57.11'
 slave_ip: '192.168.57.12'
+```
 
 Данные переменные требуются для темплейтов и выполнения некоторых модулей. 
 
