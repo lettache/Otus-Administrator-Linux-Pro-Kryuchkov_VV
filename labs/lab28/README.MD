@@ -538,8 +538,73 @@ slave_ip: '192.168.57.12'
 
 ```
 
+**Настройка резервного копирования**
+
+Настраивать резервное копирование мы будем с помощью утилиты Barman. В документации Barman рекомендуется разворачивать Barman на отдельном сервере. В этом случае потребуется настроить доступы между серверами по SSH-ключам. В данном руководстве мы будем разворачивать Barman на отдельном хосте, если Вам удобнее, для теста можно будет развернуть Barman на хосте node1. 
+
+На хостах node1 и node2 необходимо установить утилиту barman-cli, для этого: 
+1) Устанавливаем epel-release: ```dnf install epel-release -y```
+2) Устанавливаем barman-cli: ```dnf install barman-cli```
+
+На хосте barman выполняем следующие настройки: 
+1) *предварительно отключаем firewalld и SElinux
+2) Устанавливаем epel-release: ```dnf install epel-release -y``` 
+3) Добавим postgres репозиторий: ```sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm```
+4) Исключаем старый postgresql модуль: ```yum -qy module disable postgresql```
+5) Устанавливаем пакеты barman и postgresql-client: ```dnf install barman-cli barman postgresql14```
+6) Переходим в пользователя barman и генерируем ssh-ключ: 
+
+```bash
+su barman
+cd 
+```
 
 
+
+На хосте node1: 
+7) Переходим в пользователя postgres и генерируем ssh-ключ: 
+```bash
+su postgres
+cd 
+ssh-keygen -t rsa -b 4096
+```
+
+8) После генерации ключа, выводим содержимое файла ~/.ssh/id_rsa.pub: 
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+Копируем содержимое файла на сервер **barman** в файл **/var/lib/barman/.ssh/authorized_keys**
+
+9) В psql создаём пользователя barman c правами суперпользователя: ```CREATE USER barman WITH REPLICATION Encrypted PASSWORD 'Otus2022!';```
+
+10) В файл /var/lib/pgsql/14/data/pg_hba.conf добавляем разрешения для пользователя barman: 
+```bash
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            scram-sha-256
+# IPv6 local connections:
+host    all             all             ::1/128                 scram-sha-256
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+local   replication     all                                     peer
+host    replication     all             127.0.0.1/32       scram-sha-256
+host    replication     all             ::1/128            scram-sha-256
+host    replication replication    192.168.57.11/32        scram-sha-256
+host    replication replication    192.168.57.12/32        scram-sha-256
+host    all           barman       192.168.57.13/32        scram-sha-256
+host    replication   barman       192.168.57.13/32        scram-sha-256
+```
+
+11) Перезапускаем службу postgresql-14: ```systemctl restart postgresql-14```
+12) В psql создадим тестовую базу otus: ```CREATE DATABASE otus;```
+13) В базе создаём таблицу test в базе otus: 
+```bash
+\c otus; 
+CREATE TABLE test (id int, name varchar(30));
+INSERT INTO test VALUES (1, alex); 
+```
 
 
 
