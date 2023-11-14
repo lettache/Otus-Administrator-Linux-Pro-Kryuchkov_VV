@@ -776,6 +776,139 @@ Server node1:
 bash-4.4$ 
 ```
 
+20) После этого запускаем резервную копию: 
+
+```bash
+bash-4.4$ barman backup node1
+Starting backup using postgres method for server node1 in /var/lib/barman/node1/base/20231114T083701
+Backup start at LSN: 0/2000148 (000000010000000000000002, 00000148)
+Starting backup copy via pg_basebackup for 20231114T083701
+Copy done (time: less than one second)
+Finalising the backup.
+This is the first backup for server node1
+WAL segments preceding the current backup have been found:
+	000000010000000000000001 from server node1 has been removed
+Backup size: 41.9 MiB
+Backup end at LSN: 0/4000000 (000000010000000000000003, 00000000)
+Backup completed (start time: 2023-11-14 08:37:01.474685, elapsed time: less than one second)
+Processing xlog segments from streaming for node1
+	000000010000000000000002
+WARNING: IMPORTANT: this backup is classified as WAITING_FOR_WALS, meaning that Barman has not received yet all the required WAL files for the backup consistency.
+This is a common behaviour in concurrent backup scenarios, and Barman automatically set the backup as DONE once all the required WAL files have been archived.
+Hint: execute the backup command with '--wait'
+bash-4.4$ 
+```
+
+**Проверка восстановления из бекапов:**
+
+На хосте node1 в psql удаляем базы Otus:
+
+```bash
+bash-4.4$ psql
+could not change directory to "/root": Permission denied
+psql (14.10)
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ otus      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres         +
+           |          |          |             |             | postgres=CTc/postgres+
+           |          |          |             |             | barman=CTc/postgres
+ otus_test | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres         +
+           |          |          |             |             | postgres=CTc/postgres+
+           |          |          |             |             | barman=CTc/postgres
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(5 rows)
+
+postgres=# DROP DATABASE otus;
+DROP DATABASE
+postgres=# DROP DATABASE otus_test;
+DROP DATABASE
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(3 rows)
+
+postgres=# 
+```
+
+Далее на хосте barman запустим восстановление: 
+
+```bash
+bash-4.4$ barman list-backup node1
+node1 20231114T083701 - Tue Nov 14 05:37:02 2023 - Size: 41.9 MiB - WAL Size: 0 B
+bash-4.4$ 
+bash-4.4$ 
+bash-4.4$ barman recover node1 20231114T083701 /var/lib/pgsql/14/data/ --remote-ssh-comman "ssh postgres@192.168.57.11"
+The authenticity of host '192.168.57.11 (192.168.57.11)' can't be established.
+ECDSA key fingerprint is SHA256:lu0aw9DoDInohLOFkNQPEMl7V18UtlwTxugs4BJQ6Ko.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Starting remote restore for server node1 using backup 20231114T083701
+Destination directory: /var/lib/pgsql/14/data/
+Remote command: ssh postgres@192.168.57.11
+Copying the base backup.
+Copying required WAL segments.
+Generating archive status files
+Identify dangerous settings in destination directory.
+
+Recovery completed (start time: 2023-11-14 08:43:13.464028+00:00, elapsed time: 3 seconds)
+Your PostgreSQL server has been successfully prepared for recovery!
+bash-4.4$ 
+```
+
+Далее на хосте node1 потребуется перезапустить postgresql-сервер и снова проверить список БД. Базы otus должны вернуться обратно… 
+
+```bash
+[root@node1 ~]# systemctl restart postgresql-14
+[root@node1 ~]# su postgres
+bash-4.4$ psql
+could not change directory to "/root": Permission denied
+psql (14.10)
+Type "help" for help.
+
+postgres=# \l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
+-----------+----------+----------+-------------+-------------+-----------------------
+ otus      | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres         +
+           |          |          |             |             | postgres=CTc/postgres+
+           |          |          |             |             | barman=CTc/postgres
+ otus_test | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =Tc/postgres         +
+           |          |          |             |             | postgres=CTc/postgres+
+           |          |          |             |             | barman=CTc/postgres
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+(5 rows)
+
+postgres=# 
+```
+
+**Настройка резервного копирования с помощью Ansible**
+
+
+
+
+
+
+
+
+
+
 
 
 
