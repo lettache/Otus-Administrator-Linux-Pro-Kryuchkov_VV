@@ -588,7 +588,9 @@ cat ~/.ssh/id_rsa.pub
 ```bash
 postgres=# CREATE USER barman WITH REPLICATION Encrypted PASSWORD 'Otus2022!';
 CREATE ROLE
-postgres=#
+postgres=# ALTER USER barman WITH SUPERUSER;
+ALTER ROLE
+
 ```
 
 10) В файл /var/lib/pgsql/14/data/pg_hba.conf добавляем разрешения для пользователя barman: 
@@ -740,6 +742,39 @@ backup_method = postgres
 archiver = off
 ```
 
+19) На этом настройка бекапа завершена. Теперь проверим работу barman:
+
+```bash
+bash-4.4$ barman switch-wal node1
+The WAL file 000000010000000000000001 has been closed on server 'node1'
+bash-4.4$ barman cron
+Starting WAL archiving for server node1
+bash-4.4$ barman check node1
+Server node1:
+	PostgreSQL: OK
+	superuser or standard user with backup privileges: OK
+	PostgreSQL streaming: OK
+	wal_level: OK
+	replication slot: OK
+	directories: OK
+	retention policy settings: OK
+	backup maximum age: FAILED (interval provided: 4 days, latest backup age: No available backups)
+	backup minimum size: OK (0 B)
+	wal maximum age: OK (no last_wal_maximum_age provided)
+	wal size: OK (0 B)
+	compression settings: OK
+	failed backups: OK (there are 0 failed backups)
+	minimum redundancy requirements: FAILED (have 0 backups, expected at least 1)
+	pg_basebackup: OK
+	pg_basebackup compatible: OK
+	pg_basebackup supports tablespaces mapping: OK
+	systemid coherence: OK (no system Id stored on disk)
+	pg_receivexlog: OK
+	pg_receivexlog compatible: OK
+	receive-wal running: OK
+	archiver errors: OK
+bash-4.4$ 
+```
 
 
 
